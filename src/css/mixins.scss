@@ -1,0 +1,15 @@
+//FONTS
+@mixin regular-font {
+  font-family: 'Raleway';
+  font-weight: 400;
+}
+
+@mixin light-font {
+  font-family: 'Raleway';
+  font-weight: 100;
+}
+
+@mixin bold-font {
+  font-family: 'Raleway';
+  font-weight: 600;
+}
