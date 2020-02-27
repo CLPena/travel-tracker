@@ -3,21 +3,23 @@
   <head>
     <title>Travel Tracker</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/d1dc70eb03.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
-      <h1 class="travel-tracker-home"><i class="far fa-compass"></i> TRAVEL TRACKER</h1>
+      <button class="home-button"></button><h1 class="travel-tracker-home"> TRAVEL TRACKER</h1>
     </header>
-    <main class="login-screen">
-      <form class="login-form">
-        <h2><i class="fas fa-map-marker-alt"></i> SIGN IN: </h2>
-        <label for="username">username:</label>
-        <input aria-label="type email address here" type="text" class="login-input" name="user_name">
-        <label for="password">password:</label>
-        <input aria-label="type email address here" type="text" class="login-input" name="user_name">
-        <button class="submit-button" type="button">submit</button>
-      </form>
-    </main>
+    <main>
+      <div class="login-screen">
+        <form class="login-form">
+          <h2><img class="pin" src="./images/pin.png" alt="map pin icon"> SIGN IN: </h2>
+          <p class="error-message hidden">please enter a valid username and password!</p>
+          <label for="username">username:</label>
+          <input aria-label="type username here" type="text" class="login-input username-input" name="username">
+          <label for="password">password:</label>
+          <input aria-label="type password here" type="password" class="login-input password-input" name="password">
+          <button class="submit-button login-button" type="submit">submit</button>
+        </form>
+      </div>
+  </main>
   </body>
 </html>

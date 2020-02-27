@@ -13,3 +13,31 @@
   font-family: 'Raleway';
   font-weight: 600;
 }
+
+//STRUCTURE
+@mixin no-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin margin-bottom-top($bottom, $top) {
+  margin-bottom: $bottom;
+  margin-top: $top;
+}
+
+@mixin basic-flex($flow) {
+  display: flex;
+  flex-flow: $flow;
+}
+
+//STYLES
+@mixin clay-border {
+  border: 2px solid $clay;
+  border-radius: 10px;
+}
+
+@mixin clay-hover {
+  background-color: $transparent-clay;
+  color: white;
+  cursor: pointer;
+}
