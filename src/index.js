@@ -32,8 +32,7 @@ Promise.all([travelersData, tripsData, destinationsData])
     tripsData = data[1];
     destinationsData = data[2];
 
-    loginSubmitButton.addEventListener('click', checkPassword);
-    // loginSubmitButton.addEventListener('keyup', determineKey);
+    loginForm.addEventListener('submit', preventReload)
   })
   .catch(error => console.log(error.message))
 
@@ -44,14 +43,16 @@ let loginMain = document.querySelector('.login-screen');
 let loginSubmitButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
 let passwordInput = document.querySelector('.password-input');
+let loginForm = document.querySelector('.login-form');
 
-// function determineKey(event) {
-//   if(event.keyCode === 13) {
-//     determineIfAgent();
-//   }
-// }
 
 // LOGIN FUNCTIONS //
+
+function preventReload(e) {
+  e.preventDefault();
+  checkPassword();
+};
+
 function checkPassword() {
   if (passwordInput.value === 'travel2020') {
     determineIfAgent();
