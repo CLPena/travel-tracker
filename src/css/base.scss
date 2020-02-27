@@ -96,10 +96,6 @@ label, button {
   }
 }
 
-.error {
-  @include error-border;
-}
-
 .hidden {
   display: none;
   color: $clay;
@@ -113,4 +109,11 @@ label, button {
   height: 2em;
   width: 2em;
   margin: 0 5px;
+}
+
+.error-message {
+  width: 75%;
+  border: 2px solid $clay;
+  border-radius: 10px;
+  padding: 1em;
 }

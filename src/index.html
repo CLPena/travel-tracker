@@ -11,13 +11,12 @@
     <main class="login-screen">
       <form class="login-form">
         <h2><img class="pin" src="./images/pin.png" alt="map pin icon"> SIGN IN: </h2>
+        <p class="error-message hidden">please enter a valid username and password!</p>
         <label for="username">username:</label>
-        <p class="error-message username-error hidden">please enter a valid username!</p>
-        <input aria-label="type email address here" type="text" class="login-input" name="user_name">
+        <input aria-label="type username here" type="text" class="login-input username-input" name="username">
         <label for="password">password:</label>
-        <p class="error-message password-error hidden">please enter a valid password!</p>
-        <input aria-label="type email address here" type="text" class="login-input" name="user_name">
-        <button class="submit-button" type="button">submit</button>
+        <input aria-label="type password here" type="password" class="login-input password-input" name="password">
+        <button class="submit-button login-button" type="button">submit</button>
       </form>
     </main>
   </body>

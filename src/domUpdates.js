@@ -1,12 +1,22 @@
 import $ from 'jquery';
 
 let domUpdates = {
-  showTravelerDashboard(){
-    //if incorrect input apply error class, clear input for that field, remove hidden class from error message above field 
+  // showTravelerDashboard(){
+  //
+  // },
+  //
+  // showAgentDashboard(){
+  //
+  // },
+
+  displayError() {
+      $('.error-message').removeClass('hidden');
   },
 
-  showAgentDashboard(){
-
-  }
+  clearMain() {
+    $('.login-screen').addClass('hidden');
+  },
 
 }
+
+export default domUpdates;
