@@ -10,7 +10,7 @@ html {
 body {
   background-color: $light-blue;
   background-image: url(../images/login-background.jpg);
-  color: $grey;
+  color: $eggplant;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -37,7 +37,7 @@ main {
 h1 {
   padding: 0;
   margin: 0;
-  color: $purple;
+  color: $eggplant;
 }
 
 .login-form {
@@ -69,12 +69,12 @@ label, button {
   @include bold-font;
 }
 
-button {
+.submit-button {
   border: 2px solid $clay;
   border-radius: 10px;
   width: 30%;
   background-color: $transparent-white;
-  color: $grey;
+  color: $eggplant;
   margin: 5px;
   padding: 5px;
   &:hover {
