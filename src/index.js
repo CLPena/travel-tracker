@@ -1,4 +1,9 @@
 import domUpdates from './domUpdates';
+import Destination from './destination';
+import Traveler from './traveler';
+import Trip from './trip';
+import Agency from './agency';
+
 import $ from 'jquery';
 import './css/base.scss';
 import './images/login-background.jpg';
@@ -40,7 +45,6 @@ let loginSubmitButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
 let passwordInput = document.querySelector('.password-input');
 
-
 // function determineKey(event) {
 //   if(event.keyCode === 13) {
 //     determineIfAgent();
@@ -48,15 +52,32 @@ let passwordInput = document.querySelector('.password-input');
 // }
 
 function determineIfAgent() {
-  if(usernameInput.value === 'agency' && passwordInput.value === 'travel2020') {
-    domUpdates.clearMain()
+  if (usernameInput.value === 'agency' && passwordInput.value === 'travel2020') {
+    domUpdates.clearMain();
   } else {
-    determineIfTraveler();
+    determineTravelerID();
   }
 }
 
-function determineIfTraveler() {
-  if(usernameInput.value === 'traveler50' && passwordInput.value === 'travel2020') {
+function determineTravelerID() {
+  if (usernameInput.value.includes('traveler')) {
+    let num = parseInt(usernameInput.value.replace('traveler', ''));
+    checkRange(num)
+  } else {
+    domUpdates.displayError();
+  }
+}
+
+function checkRange(num) {
+  if(num >= 1 && num <= 50) {
+    checkPassword();
+  } else {
+    domUpdates.displayError();
+  }
+}
+
+function checkPassword() {
+  if (passwordInput.value === 'travel2020') {
     domUpdates.clearMain()
   } else {
     domUpdates.displayError();
