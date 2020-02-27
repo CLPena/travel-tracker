@@ -32,7 +32,7 @@ Promise.all([travelersData, tripsData, destinationsData])
     tripsData = data[1];
     destinationsData = data[2];
 
-    loginSubmitButton.addEventListener('click', determineIfAgent);
+    loginSubmitButton.addEventListener('click', checkPassword);
     // loginSubmitButton.addEventListener('keyup', determineKey);
   })
   .catch(error => console.log(error.message))
@@ -51,9 +51,19 @@ let passwordInput = document.querySelector('.password-input');
 //   }
 // }
 
+// LOGIN FUNCTIONS //
+function checkPassword() {
+  if (passwordInput.value === 'travel2020') {
+    determineIfAgent();
+  } else {
+    domUpdates.displayError();
+  }
+}
+
 function determineIfAgent() {
-  if (usernameInput.value === 'agency' && passwordInput.value === 'travel2020') {
+  if (usernameInput.value === 'agency') {
     domUpdates.clearMain();
+    domUpdates.showAgentDashboard(travelersData, tripsData, destinationsData);
   } else {
     determineTravelerID();
   }
@@ -70,15 +80,8 @@ function determineTravelerID() {
 
 function checkRange(num) {
   if(num >= 1 && num <= 50) {
-    checkPassword();
-  } else {
-    domUpdates.displayError();
-  }
-}
-
-function checkPassword() {
-  if (passwordInput.value === 'travel2020') {
-    domUpdates.clearMain()
+    domUpdates.clearMain();
+    domUpdates.showTravelerDashboard(travelersData, tripsData, destinationsData);
   } else {
     domUpdates.displayError();
   }
