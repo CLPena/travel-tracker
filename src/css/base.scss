@@ -105,3 +105,12 @@ label, button {
   color: $clay;
   @include bold-font;
 }
+
+.home-button {
+  border: none;
+  background: url('../images/compass.png') no-repeat;
+  background-size: contain;
+  height: 2em;
+  width: 2em;
+  margin: 0 5px;
+}
