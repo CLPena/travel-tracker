@@ -18,7 +18,11 @@ let domUpdates = {
   },
 
   showAgentDashboard(travelersData, tripsData, destinationsData){
-
+    $('main').append(
+      `<div class="user-dashboard">
+        <h2> Welcome! </h2>
+      </div>`
+    )
   },
 
   displayError() {

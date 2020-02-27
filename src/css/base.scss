@@ -11,36 +11,32 @@ body {
   background-color: $light-blue;
   background-image: url(../images/login-background.jpg);
   color: $eggplant;
-  margin: 0;
-  padding: 0;
+  @include no-margin-padding;
   height: 100vh;
 }
 
 header {
-  width: 100%;
-  height: 15%;
   background-color: transparent;
+  @include basic-flex(row nowrap)
+  height: 15%;
   margin: 0;
   padding: 1em 1em 1em 4%;
-  text-align: left;
   position: fixed;
-  display: flex;
-  flex-flow: row nowrap;
+  text-align: left;
+  width: 100%;
 }
 
 main {
-  height: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
   align-items: center;
+  @include basic-flex(row wrap)
+  height: 100%;
+  justify-content: space-around;
 }
 
 h1 {
-  padding: 0;
-  margin: 0;
   color: $eggplant;
   font-size: 2em;
+  @include no-margin-padding;
 }
 
 h3 {
@@ -57,27 +53,24 @@ h3 {
 }
 
 .login-form {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 300px;
-  height: 350px;
-  border: 2px solid $clay;
-  border-radius: 10px;
-  padding: 1em;
   align-items: center;
-  justify-content: space-around;
   background-color: $transparent-white;
+  @include clay-border;
+  @include basic-flex(column nowrap)
+  height: 350px;
+  justify-content: space-around;
   margin: 0;
+  padding: 1em;
+  width: 300px;
 }
 
 .login-input {
-  border: 2px solid $clay;
-  border-radius: 10px;
-  width: 75%;
-  height: 30px;
   background-color: $transparent-white;
-  margin: 5px;
+  @include clay-border;
   font-size: 16px;
+  height: 30px;
+  margin: 5px;
+  width: 75%;
 }
 
 label, button {
@@ -86,64 +79,57 @@ label, button {
 }
 
 .submit-button {
-  border: 2px solid $clay;
-  border-radius: 10px;
-  width: 30%;
   background-color: $transparent-white;
+  @include clay-border;
   color: $eggplant;
   margin: 5px;
   padding: 5px;
+  width: 30%;
   &:hover {
-    background-color: $transparent-clay;
-    color: white;
-    cursor: pointer;
+    @include clay-hover;
   }
 }
 
 .hidden {
-  display: none;
   color: $clay;
+  display: none;
   @include bold-font;
 }
 
 .home-button {
-  border: none;
   background: url('../images/compass.png') no-repeat;
   background-size: contain;
+  border: none;
   height: 2em;
-  width: 2em;
   margin: 0 5px;
+  width: 2em;
 }
 
 .error-message {
-  width: 75%;
-  border: 2px solid $clay;
-  border-radius: 10px;
+  @include clay-border;
   padding: 1em;
+  width: 75%;
 }
 
 .user-dashboard {
-  display: flex;
-  flex-flow: row wrap;
-  width: 100%;
-  height: 75%;
-  padding: 1em;
   align-items: center;
-  justify-content: space-around;
   background-color: $transparent-white;
+  @include basic-flex(row wrap)
+  height: 75%;
+  justify-content: space-around;
   margin: 5% 0% 2% 0%;
+  padding: 1em;
+  width: 100%;
 }
 
 .traveler-info {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 150px;
-  height: 170px;
-  border: 2px solid $clay;
-  border-radius: 10px;
-  padding: 1em;
   background-color: $transparent-white;
+  @include clay-border;
+  @include basic-flex(column nowrap);
+  height: 170px;
   margin: 0;
+  padding: 1em;
+  width: 150px;
 }
 
 .bold {
@@ -152,11 +138,9 @@ label, button {
 }
 
 .info {
-  margin-bottom: 4px;
-  margin-top: 0;
+  @include margin-bottom-top(4px, 0)
 }
 
 .space {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  @include margin-bottom-top(10px, 10px)
 }
