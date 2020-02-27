@@ -3,7 +3,6 @@
   <head>
     <title>Travel Tracker</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/d1dc70eb03.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
@@ -13,11 +12,14 @@
       <form class="login-form">
         <h2><i class="fas fa-map-marker-alt"></i> SIGN IN: </h2>
         <label for="username">username:</label>
+        <p class="error-message username-error hidden">please enter a valid username!</p>
         <input aria-label="type email address here" type="text" class="login-input" name="user_name">
         <label for="password">password:</label>
+        <p class="error-message password-error hidden">please enter a valid password!</p>
         <input aria-label="type email address here" type="text" class="login-input" name="user_name">
         <button class="submit-button" type="button">submit</button>
       </form>
     </main>
   </body>
+  <script src="https://kit.fontawesome.com/d1dc70eb03.js" crossorigin="anonymous"></script>
 </html>

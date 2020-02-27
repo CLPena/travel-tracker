@@ -83,3 +83,13 @@ label, button {
     cursor: pointer;
   }
 }
+
+.error {
+  @include error-border;
+}
+
+.hidden {
+  // display: none;
+  color: $clay;
+  @include bold-font;
+}

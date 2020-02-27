@@ -13,3 +13,8 @@
   font-family: 'Raleway';
   font-weight: 600;
 }
+
+//ERROR
+@mixin error-border {
+  border: 2px solid red;
+}
