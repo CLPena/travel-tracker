@@ -132,7 +132,7 @@ label, button {
   width: 150px;
 }
 
-.traveler-trips {
+.traveler-trips, .cost-widget {
   background-color: $transparent-white;
   @include clay-border;
   @include basic-flex(column nowrap);

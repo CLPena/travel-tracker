@@ -39,6 +39,24 @@ let domUpdates = {
     )
   },
 
+  createCostOfTravelWidget(tripFinder) {
+    if (tripFinder.annualCost === 0) {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>TRAVEL EXPENSES THIS YEAR:</h3>
+          <p class="info">no travel expenses (yet)!</p>
+        </div>`
+      )
+    } else {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>ANNUAL TRAVEL EXPENSES:</h3>
+          <p class="info">$${tripFinder.annualCost}</p>
+        </div>`
+      )
+    }
+  },
+
   showAgentDashboard(travelersData, tripsData, destinationsData){
     $('main').append(
       `<div class="user-dashboard">

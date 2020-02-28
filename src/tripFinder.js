@@ -5,20 +5,26 @@ class TripFinder extends Finder {
     super(tripsData, destinationsData, travelersData)
     this.traveler = traveler;
     this.trips = super.findTripsForTraveler(this.traveler);
-    this.approvedTrips = [];
-    this.pendingTrips = [];
+    this.approvedTrips = this.findApprovedTrips();
+    this.pendingTrips = this.findPendingTrips();
+    this.annualTrips = this.findAnnualTrips();
+    this.annualCost = this.findCostOfTravel();
   }
 
   findApprovedTrips() {
-    this.approvedTrips = this.trips.filter(trip => trip.status === "approved");
+    return this.trips.filter(trip => trip.status === "approved");
   }
 
   findPendingTrips() {
-    this.pendingTrips = this.trips.filter(trip => trip.status === "pending");
+    return this.trips.filter(trip => trip.status === "pending");
+  }
+
+  findAnnualTrips() {
+    return this.trips.filter(trip => trip.date.includes('2020'));
   }
 
   findCostOfTravel() {
-    return this.trips.reduce((acc, trip) => {
+    return this.annualTrips.reduce((acc, trip) => {
       let duration = trip.duration;
       let destination = this.destinationsData.find(destination => destination.id === trip.destinationID);
       let flightsCost = destination.estimatedFlightCostPerPerson * trip.travelers;
