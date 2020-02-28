@@ -73,7 +73,7 @@ function determineIfAgent() {
 function determineTravelerID() {
   if (usernameInput.value.includes('traveler')) {
     let id = parseInt(usernameInput.value.replace('traveler', ''));
-    checkRange(id)
+    checkRange(id);
   } else {
     domUpdates.displayError();
   }
@@ -91,5 +91,9 @@ function checkRange(id) {
 function createTraveler(id) {
   let foundTraveler = travelersData.find(traveler => traveler.id === id)
   traveler = new Traveler(foundTraveler.id, foundTraveler.name, foundTraveler.travelerType);
+  traveler.findTrips(tripsData);
+  traveler.findApprovedTrips();
+  traveler.findPendingTrips();
   domUpdates.showTravelerDashboard(traveler);
+  domUpdates.createPendingTripsWidget(traveler, destinationsData);
 }

@@ -17,6 +17,28 @@ let domUpdates = {
     )
   },
 
+  createPendingTripsWidget(traveler, destinationsData) {
+    let travelerPendingTrips;
+
+    if (traveler.pendingTrips.length){
+      travelerPendingTrips = (traveler.pendingTrips.map(trip => {
+      return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+      <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
+      <p class="trip-info">travelers: ${trip.travelers}</p>
+      `
+      })).join(" ")
+    } else {
+      travelerPendingTrips = `<p class="bold destination">You have no pending trips!</p>`
+    }
+
+    $('.user-dashboard').append(
+      `<div class="traveler-trips">
+        <h3>PENDING TRIPS:</h3>
+        <p class="info">${travelerPendingTrips}</p>
+      </div>`
+    )
+  },
+
   showAgentDashboard(travelersData, tripsData, destinationsData){
     $('main').append(
       `<div class="user-dashboard">
