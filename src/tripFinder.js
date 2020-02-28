@@ -21,7 +21,8 @@ class TripFinder extends Finder {
   }
 
   findAnnualTrips() {
-    return this.trips.filter(trip => trip.date.includes('2020'));
+    let year = new Date().getUTCFullYear();
+    return this.trips.filter(trip => trip.date.includes(year));
   }
 
   findUpcomingTrips() {
