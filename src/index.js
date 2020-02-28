@@ -93,10 +93,7 @@ function createTraveler(id) {
   let foundTraveler = travelersData.find(traveler => traveler.id === id);
   traveler = new Traveler(foundTraveler.id, foundTraveler.name, foundTraveler.travelerType);
   let tripFinder = new TripFinder(traveler, tripsData, destinationsData, travelersData);
-  // tripFinder.findApprovedTrips();
-  // tripFinder.findPendingTrips();
   domUpdates.showTravelerDashboard(traveler);
   domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
-  // tripFinder.findCostOfTravel();
   domUpdates.createCostOfTravelWidget(tripFinder)
 }
