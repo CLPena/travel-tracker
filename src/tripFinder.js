@@ -18,11 +18,14 @@ class TripFinder extends Finder {
   }
 
   findCostOfTravel() {
-    //REDUCE:
-    //go through trips array for dates this year and find duration of each trip
-    //     FIND then find the matching destination from the destinationsData array and return the average cost per night
-    // multiply the cost per night by the duration and add to ACC
-    //return ACC
+    return this.trips.reduce((acc, trip) => {
+      let duration = trip.duration;
+      let destination = this.destinationsData.find(destination => destination.id === trip.destinationID);
+      let flightsCost = destination.estimatedFlightCostPerPerson * trip.travelers;
+      let lodgingCost = destination.estimatedLodgingCostPerDay * trip.duration;
+      let total = flightsCost + lodgingCost;
+      return acc += total;
+    }, 0)
   }
 }
 
