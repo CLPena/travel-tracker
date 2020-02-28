@@ -8,18 +8,6 @@ class Traveler {
     this.pendingTrips = [];
   }
 
-  findTrips(tripsData) {
-    this.trips = tripsData.filter(trip => trip.userID === this.id);
-  }
-
-  findApprovedTrips() {
-    this.approvedTrips = this.trips.filter(trip => trip.status === "approved");
-  }
-
-  findPendingTrips() {
-    this.pendingTrips = this.trips.filter(trip => trip.status === "pending");
-  }
-
 }
 
 export default Traveler;

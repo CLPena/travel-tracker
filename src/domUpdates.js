@@ -17,11 +17,11 @@ let domUpdates = {
     )
   },
 
-  createPendingTripsWidget(traveler, destinationsData) {
+  createPendingTripsWidget(tripFinder, destinationsData) {
     let travelerPendingTrips;
 
-    if (traveler.pendingTrips.length){
-      travelerPendingTrips = (traveler.pendingTrips.map(trip => {
+    if (tripFinder.pendingTrips.length){
+      travelerPendingTrips = (tripFinder.pendingTrips.map(trip => {
       return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
       <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
       <p class="trip-info">travelers: ${trip.travelers}</p>

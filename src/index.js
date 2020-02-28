@@ -1,7 +1,8 @@
 import domUpdates from './domUpdates';
 import Destination from './destination';
 import Traveler from './traveler';
-import Trip from './trip';
+import TripFinder from './tripFinder';
+import Finder from './Finder';
 import Agency from './agency';
 
 import $ from 'jquery';
@@ -89,11 +90,12 @@ function checkRange(id) {
 }
 
 function createTraveler(id) {
-  let foundTraveler = travelersData.find(traveler => traveler.id === id)
+  let foundTraveler = travelersData.find(traveler => traveler.id === id);
   traveler = new Traveler(foundTraveler.id, foundTraveler.name, foundTraveler.travelerType);
-  traveler.findTrips(tripsData);
-  traveler.findApprovedTrips();
-  traveler.findPendingTrips();
+  let tripFinder = new TripFinder(traveler, tripsData, destinationsData, travelersData);
+  // tripFinder.findTrips();
+  tripFinder.findApprovedTrips();
+  tripFinder.findPendingTrips();
   domUpdates.showTravelerDashboard(traveler);
-  domUpdates.createPendingTripsWidget(traveler, destinationsData);
+  domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
 }
