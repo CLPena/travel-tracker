@@ -1,7 +1,8 @@
 import domUpdates from './domUpdates';
 import Destination from './destination';
 import Traveler from './traveler';
-import Trip from './trip';
+import TripFinder from './tripFinder';
+import Finder from './Finder';
 import Agency from './agency';
 
 import $ from 'jquery';
@@ -73,7 +74,7 @@ function determineIfAgent() {
 function determineTravelerID() {
   if (usernameInput.value.includes('traveler')) {
     let id = parseInt(usernameInput.value.replace('traveler', ''));
-    checkRange(id)
+    checkRange(id);
   } else {
     domUpdates.displayError();
   }
@@ -89,7 +90,13 @@ function checkRange(id) {
 }
 
 function createTraveler(id) {
-  let foundTraveler = travelersData.find(traveler => traveler.id === id)
+  let foundTraveler = travelersData.find(traveler => traveler.id === id);
   traveler = new Traveler(foundTraveler.id, foundTraveler.name, foundTraveler.travelerType);
+  let tripFinder = new TripFinder(traveler, tripsData, destinationsData, travelersData);
   domUpdates.showTravelerDashboard(traveler);
+  domUpdates.createCurrentTripWidget(tripFinder, destinationsData);
+  domUpdates.createUpcomingTripsWidget(tripFinder, destinationsData);
+  domUpdates.createPastTripsWidget(tripFinder, destinationsData);
+  domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
+  domUpdates.createCostOfTravelWidget(tripFinder);
 }
