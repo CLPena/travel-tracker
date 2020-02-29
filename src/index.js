@@ -39,7 +39,6 @@ Promise.all([travelersData, tripsData, destinationsData])
 
 // DECLARE VARIABLES //
 let traveler, trip, destination, agency;
-
 let loginMain = document.querySelector('.login-screen');
 let loginSubmitButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');

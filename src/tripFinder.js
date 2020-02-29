@@ -1,8 +1,6 @@
 import Finder from './Finder';
 import moment from 'moment'
 
-// const moment = require('moment')
-
 class TripFinder extends Finder {
   constructor(traveler, tripsData, destinationsData, travelersData) {
     super(tripsData, destinationsData, travelersData)

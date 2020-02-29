@@ -11,7 +11,3 @@ class Traveler {
 }
 
 export default Traveler;
-
-
-// - [ ] All of my trips (past, present, upcoming)
-// - [ ] Total amount I have spent on trips this year (including travel agent’s 10% fee)
