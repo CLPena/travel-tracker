@@ -17,7 +17,7 @@ let domUpdates = {
     )
   },
 
-  createPendingTripsWidget(tripFinder, destinationsData) {
+  createPendingTripsWidget(tripFinder,) {
     let travelerPendingTrips;
 
     if (tripFinder.pendingTrips.length){
@@ -35,6 +35,28 @@ let domUpdates = {
       `<div class="traveler-trips">
         <h3>PENDING TRIPS:</h3>
         <p class="info">${travelerPendingTrips}</p>
+      </div>`
+    )
+  },
+
+  createUpcomingTripsWidget(tripFinder, destinationsData) {
+    let travelerUpcomingTrips;
+
+    if (tripFinder.upcomingTrips.length){
+      travelerUpcomingTrips = (tripFinder.upcomingTrips.map(trip => {
+      return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+      <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
+      <p class="trip-info">travelers: ${trip.travelers}</p>
+      `
+      })).join(" ")
+    } else {
+      travelerUpcomingTrips = `<p class="bold destination">You have no upcoming trips!</p>`
+    }
+
+    $('.user-dashboard').append(
+      `<div class="traveler-trips">
+        <h3>UPCOMING TRIPS:</h3>
+        <p class="info">${travelerUpcomingTrips}</p>
       </div>`
     )
   },

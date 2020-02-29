@@ -1,4 +1,7 @@
 import Finder from './Finder';
+import moment from 'moment'
+
+// const moment = require('moment')
 
 class TripFinder extends Finder {
   constructor(traveler, tripsData, destinationsData, travelersData) {
@@ -26,12 +29,13 @@ class TripFinder extends Finder {
   }
 
   findUpcomingTrips() {
-    let currentDate = new Date();
-    console.log(currentDate)
-    return this.trips.sort((a, b) => b.date - a.date)
-
-    //SORT this.trips chronologically
-    //FILTER dates with value greater than currentDate
+    let currentDate = moment().format("YYYYMMDD");
+    let formattedDates = this.trips.map(trip => {
+      trip.formattedDate = trip.date.split("/").join("");
+      return trip;
+    });
+    let upcomingTrips = formattedDates.filter(trip => trip.formattedDate > currentDate);
+    return upcomingTrips;
   }
 
   findCostOfTravel() {
