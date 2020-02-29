@@ -2,9 +2,9 @@ import $ from 'jquery';
 
 let domUpdates = {
   showTravelerDashboard(traveler){
+    $('header').append(`<h2 class="banner-welcome"> Welcome, ${traveler.name}! </h2>`)
     $('main').append(
       `<div class="user-dashboard">
-        <h2> Welcome, ${traveler.name}! </h2>
         <div class="traveler-info">
           <h3> PROFILE: </h3>
           <p class="bold">name:</p>
@@ -57,6 +57,28 @@ let domUpdates = {
       `<div class="traveler-trips">
         <h3>UPCOMING TRIPS:</h3>
         <p class="info">${travelerUpcomingTrips}</p>
+      </div>`
+    )
+  },
+
+  createPastTripsWidget(tripFinder, destinationsData) {
+    let travelerPastTrips;
+
+    if (tripFinder.pastTrips.length){
+      travelerPastTrips = (tripFinder.pastTrips.map(trip => {
+      return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+      <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
+      <p class="trip-info">travelers: ${trip.travelers}</p>
+      `
+      })).join(" ")
+    } else {
+      travelerPastTrips = `<p class="bold destination">You haven't taken any trips yet!</p>`
+    }
+
+    $('.user-dashboard').append(
+      `<div class="traveler-trips">
+        <h3>PAST TRIPS:</h3>
+        <p class="info">${travelerPastTrips}</p>
       </div>`
     )
   },

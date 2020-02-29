@@ -95,7 +95,8 @@ function createTraveler(id) {
   let tripFinder = new TripFinder(traveler, tripsData, destinationsData, travelersData);
   domUpdates.showTravelerDashboard(traveler);
   domUpdates.createCurrentTripWidget(tripFinder, destinationsData);
-  domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
   domUpdates.createUpcomingTripsWidget(tripFinder, destinationsData);
+  domUpdates.createPastTripsWidget(tripFinder, destinationsData);
+  domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
   domUpdates.createCostOfTravelWidget(tripFinder);
 }
