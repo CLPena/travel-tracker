@@ -13,6 +13,7 @@ class TripFinder extends Finder {
     this.annualTrips = this.findAnnualTrips();
     this.annualCost = this.findCostOfTravel().toFixed(2);
     this.upcomingTrips = this.findUpcomingTrips();
+    this.currentTrip = this.findCurrentTrip();
   }
 
   findApprovedTrips() {
@@ -29,13 +30,21 @@ class TripFinder extends Finder {
   }
 
   findUpcomingTrips() {
-    let currentDate = moment().format("YYYYMMDD");
-    let formattedDates = this.trips.map(trip => {
-      trip.formattedDate = trip.date.split("/").join("");
-      return trip;
-    });
-    let upcomingTrips = formattedDates.filter(trip => trip.formattedDate > currentDate);
-    return upcomingTrips;
+    let currentDate = moment().format("YYYY/MM/DD");
+    return this.trips.reduce((upcoming, trip) => {
+      if(moment(trip.date).isAfter(currentDate, "day")){
+        upcoming.push(trip);
+      }
+      return upcoming;
+    }, [])
+  }
+
+  findCurrentTrip() {
+    let currentDate = moment().format("YYYY/MM/DD");
+    let currentTrip = this.trips.find(trip =>
+      (moment(trip.date).isBefore(currentDate, "day") &&  moment(trip.date).add(trip.duration, "days").isAfter(currentDate))
+    )
+    return currentTrip
   }
 
   findCostOfTravel() {

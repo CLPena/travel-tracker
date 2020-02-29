@@ -97,4 +97,5 @@ function createTraveler(id) {
   domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
   domUpdates.createUpcomingTripsWidget(tripFinder, destinationsData);
   domUpdates.createCostOfTravelWidget(tripFinder);
+  console.log(tripFinder)
 }
