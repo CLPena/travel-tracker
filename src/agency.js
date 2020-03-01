@@ -9,6 +9,7 @@ class Agency extends Finder{
     this.travelersToday = this.findTravelersToday();
     this.annualTrips = this.findAnnualTrips();
     this.annualIncome = this.calculateAnnualIncome().toFixed(2);
+    this.pendingTrips = this.findPendingTrips();
   }
 
   findTravelersToday() {
@@ -39,10 +40,11 @@ class Agency extends Finder{
     }, 0)
   }
 
+  findPendingTrips() {
+    return this.allTrips.filter(trip => trip.status === "pending");
+  }
+
 }
 
 
 export default Agency;
-
-// 2.1 - Agent Dashboard
-// - [ ] New trip requests

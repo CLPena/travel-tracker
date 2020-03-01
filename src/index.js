@@ -104,5 +104,6 @@ function createAgency() {
   let agency = new Agency(tripsData, destinationsData, travelersData);
   domUpdates.showAgentDashboard();
   domUpdates.createAgencyIncomeWidget(agency);
-  domUpdates.createTravelersTodayWidget(agency)
+  domUpdates.createTravelersTodayWidget(agency);
+  domUpdates.createPendingTripsAgencyWidget(agency, destinationsData, travelersData);
 }
