@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import moment from 'moment';
 
 import Finder from '../src/finder';
 import TripFinder from '../src/tripFinder'
@@ -25,8 +26,8 @@ describe('TripFinder', function() {
       "travelers": 5,
       "date": "2020/10/04",
       "duration": 18,
-    "status": "pending",
-    "suggestedActivities": []
+      "status": "pending",
+      "suggestedActivities": []
     },
     {
       "id": 3,
@@ -157,6 +158,49 @@ describe('TripFinder', function() {
       "status": "pending",
       "suggestedActivities": []
     }]);
+  });
+
+  it('Should be able to find upcoming trips for a specific traveler', () => {
+    expect(tripFinder.findUpcomingTrips()).to.deep.equal([{
+      "id": 2,
+      "userID": 1,
+      "destinationID": 2,
+      "travelers": 5,
+      "date": "2020/10/04",
+      "duration": 18,
+      "status": "pending",
+      "suggestedActivities": []
+    }]);
+  });
+
+  it('Should be able to find past trips for a specific traveler', () => {
+    expect(tripFinder.findPastTrips()).to.deep.equal([{
+      "id": 1,
+      "userID": 1,
+      "destinationID": 1,
+      "travelers": 1,
+      "date": "2019/09/16",
+      "duration": 8,
+      "status": "approved",
+      "suggestedActivities": []
+    }]);
+  });
+
+  it('Should be able to find current trips for a specific traveler', () => {
+    let today = moment().format("YYYY/MM/DD");
+    let tripToday = {
+      "id": 4,
+      "userID": 1,
+      "destinationID": 3,
+      "travelers": 4,
+      "date": today,
+      "duration": 17,
+      "status": "approved",
+      "suggestedActivities": []
+    }
+    tripFinder.trips.push(tripToday);
+
+    expect(tripFinder.findCurrentTrip()).to.deep.equal(tripToday);
   });
 
 });
