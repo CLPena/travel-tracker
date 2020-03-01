@@ -51,7 +51,7 @@ class TripFinder extends Finder {
   findCurrentTrip() {
     let currentDate = moment().format("YYYY/MM/DD");
     let currentTrip = this.trips.find(trip =>
-      (moment(trip.date).isBefore(currentDate, "day") &&  moment(trip.date).add(trip.duration, "days").isAfter(currentDate))
+      (moment(trip.date).isSameOrBefore(currentDate, "day") &&  moment(trip.date).add(trip.duration, "days").isSameOrAfter(currentDate))
     )
     return currentTrip
   }

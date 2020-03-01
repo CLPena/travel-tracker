@@ -26,3 +26,8 @@
 - [ ] mixins.scss
 - [ ] variables.scss
 #### test
+- [ ] agency-test.js
+- [ ] destination-test.js
+- [ ] finder-test.js
+- [ ] traveler-test.js
+- [ ] tripFinder-test.js
