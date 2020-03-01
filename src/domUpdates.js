@@ -123,7 +123,7 @@ let domUpdates = {
   },
 
   showAgentDashboard(){
-    $('header').append(`<h2 class="banner-welcome"> Welcome! </h2>`);
+    $('header').append(`<h2 class="banner-welcome"> Welcome, Travel Agent! </h2>`);
     $('main').append(
       `<div class="user-dashboard">
       </div>`
