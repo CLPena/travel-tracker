@@ -65,7 +65,6 @@ function determineIfAgent() {
   if (usernameInput.value === 'agency') {
     domUpdates.clearMain();
     createAgency();
-    domUpdates.showAgentDashboard(travelersData, tripsData, destinationsData);
   } else {
     determineTravelerID();
   }
@@ -103,5 +102,7 @@ function createTraveler(id) {
 
 function createAgency() {
   let agency = new Agency(tripsData, destinationsData, travelersData);
-  console.log(agency)
+  domUpdates.showAgentDashboard();
+  domUpdates.createAgencyIncomeWidget(agency);
+  domUpdates.createTravelersTodayWidget(agency)
 }

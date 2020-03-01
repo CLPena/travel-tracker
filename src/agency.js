@@ -8,16 +8,16 @@ class Agency extends Finder{
     this.destinationsData = destinationsData;
     this.travelersToday = this.findTravelersToday();
     this.annualTrips = this.findAnnualTrips();
-    this.annualIncome = this.calculateAnnualIncome();
+    this.annualIncome = this.calculateAnnualIncome().toFixed(2);
   }
 
   findTravelersToday() {
     let currentDate = moment().format("YYYY/MM/DD");
     let currentTrips = this.allTrips.filter(trip =>
       (moment(trip.date).isBefore(currentDate, "day") &&  moment(trip.date).add(trip.duration, "days").isAfter(currentDate)))
-    return currentTrips.reduce((travelersToday, trip) => {
-      travelersToday += trip.travelers;
-      return travelersToday;
+    return currentTrips.reduce((travelers, trip) => {
+      travelers += trip.travelers;
+      return travelers;
     }, 0)
   }
 

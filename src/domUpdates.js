@@ -122,12 +122,48 @@ let domUpdates = {
     }
   },
 
-  showAgentDashboard(travelersData, tripsData, destinationsData){
+  showAgentDashboard(){
     $('header').append(`<h2 class="banner-welcome"> Welcome! </h2>`);
     $('main').append(
       `<div class="user-dashboard">
       </div>`
     )
+  },
+
+  createAgencyIncomeWidget(agency) {
+    if (agency.annualIncome === 0) {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>ANNUAL COMMISSION:</h3>
+          <p class="info">no commission (yet)!</p>
+        </div>`
+      )
+    } else {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>YOUR ANNUAL COMMISSION:</h3>
+          <p class="info">$${agency.annualIncome}</p>
+        </div>`
+      )
+    }
+  },
+
+  createTravelersTodayWidget(agency) {
+    if (agency.travelersToday.length === 0) {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>NUMBER OF TRAVELERS TODAY:</h3>
+          <p class="info">no travelers today!</p>
+        </div>`
+      )
+    } else {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>NUMBER OF TRAVELERS TODAY:</h3>
+          <p class="info">${agency.travelersToday}</p>
+        </div>`
+      )
+    }
   },
 
   displayError() {
