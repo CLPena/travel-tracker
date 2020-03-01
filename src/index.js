@@ -64,7 +64,7 @@ function checkPassword() {
 function determineIfAgent() {
   if (usernameInput.value === 'agency') {
     domUpdates.clearMain();
-    domUpdates.showAgentDashboard(travelersData, tripsData, destinationsData);
+    createAgency();
   } else {
     determineTravelerID();
   }
@@ -98,4 +98,12 @@ function createTraveler(id) {
   domUpdates.createPastTripsWidget(tripFinder, destinationsData);
   domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
   domUpdates.createCostOfTravelWidget(tripFinder);
+}
+
+function createAgency() {
+  let agency = new Agency(tripsData, destinationsData, travelersData);
+  domUpdates.showAgentDashboard();
+  domUpdates.createAgencyIncomeWidget(agency);
+  domUpdates.createTravelersTodayWidget(agency);
+  domUpdates.createPendingTripsAgencyWidget(agency, destinationsData, travelersData);
 }

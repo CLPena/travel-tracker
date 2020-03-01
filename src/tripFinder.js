@@ -1,5 +1,5 @@
 import Finder from './Finder';
-import moment from 'moment'
+import moment from 'moment';
 
 class TripFinder extends Finder {
   constructor(traveler, tripsData, destinationsData, travelersData) {
@@ -57,13 +57,13 @@ class TripFinder extends Finder {
   }
 
   findCostOfTravel() {
-    return this.annualTrips.reduce((acc, trip) => {
+    return this.annualTrips.reduce((totalCost, trip) => {
       let duration = trip.duration;
       let destination = this.destinationsData.find(destination => destination.id === trip.destinationID);
       let flightsCost = destination.estimatedFlightCostPerPerson * trip.travelers;
       let lodgingCost = destination.estimatedLodgingCostPerDay * trip.duration;
       let total = (flightsCost + lodgingCost) * 1.10;
-      return acc += total;
+      return totalCost += total;
     }, 0)
   }
 }

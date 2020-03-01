@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 let domUpdates = {
   showTravelerDashboard(traveler){
-    $('header').append(`<h2 class="banner-welcome"> Welcome, ${traveler.name}! </h2>`)
+    $('header').append(`<h2 class="banner-welcome"> Welcome, ${traveler.name}!</h2>`)
     $('main').append(
       `<div class="user-dashboard">
         <div class="traveler-info">
@@ -122,10 +122,68 @@ let domUpdates = {
     }
   },
 
-  showAgentDashboard(travelersData, tripsData, destinationsData){
+  showAgentDashboard(){
+    $('header').append(`<h2 class="banner-welcome"> Welcome, Travel Agent! </h2>`);
     $('main').append(
       `<div class="user-dashboard">
-        <h2> Welcome! </h2>
+      </div>`
+    )
+  },
+
+  createAgencyIncomeWidget(agency) {
+    if (agency.annualIncome === 0) {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>ANNUAL COMMISSION:</h3>
+          <p class="info">no commission (yet)!</p>
+        </div>`
+      )
+    } else {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>YOUR ANNUAL COMMISSION:</h3>
+          <p class="info">$${agency.annualIncome}</p>
+        </div>`
+      )
+    }
+  },
+
+  createTravelersTodayWidget(agency) {
+    if (agency.travelersToday.length === 0) {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>NUMBER OF TRAVELERS TODAY:</h3>
+          <p class="info">no travelers today!</p>
+        </div>`
+      )
+    } else {
+      $('.user-dashboard').append(
+        `<div class="cost-widget">
+          <h3>NUMBER OF TRAVELERS TODAY:</h3>
+          <p class="info">${agency.travelersToday}</p>
+        </div>`
+      )
+    }
+  },
+
+  createPendingTripsAgencyWidget(agency, destinationsData, travelersData) {
+    let agencyPendingTrips;
+    if (agency.pendingTrips.length){
+      agencyPendingTrips = (agency.pendingTrips.map(trip => {
+      return `<p class="bold destination">traveler: ${(travelersData.find(traveler => traveler.id === trip.userID)).name}</p>
+      <p class="trip-info destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+      <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
+      <p class="trip-info">travelers: ${trip.travelers}</p>
+      `
+      })).join(" ")
+    } else {
+      agencyPendingTrips = `<p class="bold destination">no pending trips!</p>`
+    }
+
+    $('.user-dashboard').append(
+      `<div class="traveler-trips">
+        <h3>PENDING TRIPS:</h3>
+        <p class="info">${agencyPendingTrips}</p>
       </div>`
     )
   },
