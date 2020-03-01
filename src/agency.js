@@ -27,13 +27,15 @@ class Agency extends Finder{
   }
 
   calculateAnnualIncome() {
-    return this.annualTrips.reduce((income, trip) => {
+    return this.annualTrips.reduce((totalIncome, trip) => {
       let duration = trip.duration;
       let destination = this.destinationsData.find(destination => destination.id === trip.destinationID);
       let flightsCost = destination.estimatedFlightCostPerPerson * trip.travelers;
       let lodgingCost = destination.estimatedLodgingCostPerDay * trip.duration;
-      let total = (flightsCost + lodgingCost) * .10;
-      return income =+ total;
+      let total = (flightsCost + lodgingCost);
+      let commission = total * .1;
+      totalIncome += commission;
+      return totalIncome;
     }, 0)
   }
 
