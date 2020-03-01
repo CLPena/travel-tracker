@@ -1,5 +1,5 @@
 import Finder from './Finder';
-import moment from 'moment'
+import moment from 'moment';
 
 class TripFinder extends Finder {
   constructor(traveler, tripsData, destinationsData, travelersData) {

@@ -123,9 +123,9 @@ let domUpdates = {
   },
 
   showAgentDashboard(travelersData, tripsData, destinationsData){
+    $('header').append(`<h2 class="banner-welcome"> Welcome! </h2>`);
     $('main').append(
       `<div class="user-dashboard">
-        <h2> Welcome! </h2>
       </div>`
     )
   },

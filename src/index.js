@@ -64,6 +64,7 @@ function checkPassword() {
 function determineIfAgent() {
   if (usernameInput.value === 'agency') {
     domUpdates.clearMain();
+    createAgency();
     domUpdates.showAgentDashboard(travelersData, tripsData, destinationsData);
   } else {
     determineTravelerID();
@@ -98,4 +99,9 @@ function createTraveler(id) {
   domUpdates.createPastTripsWidget(tripFinder, destinationsData);
   domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
   domUpdates.createCostOfTravelWidget(tripFinder);
+}
+
+function createAgency() {
+  let agency = new Agency(tripsData, destinationsData, travelersData);
+  console.log(agency)
 }
