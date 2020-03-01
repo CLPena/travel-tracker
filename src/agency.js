@@ -5,8 +5,10 @@ class Agency extends Finder{
   constructor(tripsData, destinationsData, travelersData) {
     super(tripsData, destinationsData, travelersData);
     this.allTrips = tripsData;
+    this.destinationsData = destinationsData;
     this.travelersToday = this.findTravelersToday();
-    // this.annualIncome = calculateAnnualIncome();
+    this.annualTrips = this.findAnnualTrips();
+    this.annualIncome = this.calculateAnnualIncome();
   }
 
   findTravelersToday() {
@@ -18,15 +20,27 @@ class Agency extends Finder{
       return travelersToday;
     }, 0)
   }
+
+  findAnnualTrips() {
+    let year = new Date().getUTCFullYear();
+    return this.allTrips.filter(trip => trip.date.includes(year));
+  }
+
+  calculateAnnualIncome() {
+    return this.annualTrips.reduce((income, trip) => {
+      let duration = trip.duration;
+      let destination = this.destinationsData.find(destination => destination.id === trip.destinationID);
+      let flightsCost = destination.estimatedFlightCostPerPerson * trip.travelers;
+      let lodgingCost = destination.estimatedLodgingCostPerDay * trip.duration;
+      let total = (flightsCost + lodgingCost) * .10;
+      return income =+ total;
+    }, 0)
+  }
+
 }
+
 
 export default Agency;
 
-// "travelers": 1,
-// "date": "2019/09/16",
 // 2.1 - Agent Dashboard
-// - [ ] As a travel agent, upon logging in:
-// - [x] I should see a dashboard page that shows me:
 // - [ ] New trip requests
-// - [ ] Total income generated this year (should be 10% of user trip cost)
-// - [ ] Number of travelers on trips for today’s date
