@@ -199,8 +199,11 @@ describe('TripFinder', function() {
       "suggestedActivities": []
     }
     tripFinder.trips.push(tripToday);
-
     expect(tripFinder.findCurrentTrip()).to.deep.equal(tripToday);
+  });
+
+  it('Should be able to calculate annual cost of travel for a specific traveler', () => {
+    expect(tripFinder.findCostOfTravel()).to.deep.equal(6270.000000000001);
   });
 
 });
