@@ -15,7 +15,7 @@ class Agency extends Finder{
   findTravelersToday() {
     let currentDate = moment().format("YYYY/MM/DD");
     let currentTrips = this.allTrips.filter(trip =>
-      (moment(trip.date).isBefore(currentDate, "day") &&  moment(trip.date).add(trip.duration, "days").isAfter(currentDate)))
+      (moment(trip.date).isSameOrBefore(currentDate, "day") &&  moment(trip.date).add(trip.duration, "days").isSameOrAfter(currentDate)))
     return currentTrips.reduce((travelers, trip) => {
       travelers += trip.travelers;
       return travelers;
