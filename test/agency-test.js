@@ -113,8 +113,58 @@ describe('Agency', function() {
     expect(agency.findTravelersToday()).to.deep.equal(4);
   });
 
-  it.skip('Should be able to calculate annual cost of travel for a specific traveler', () => {
-    expect(tripFinder.findCostOfTravel()).to.deep.equal(6270.000000000001);
+  it('Should be able to find total annual trips', () => {
+    expect(agency.findAnnualTrips()).to.deep.equal(
+      [{
+        "id": 2,
+        "userID": 1,
+        "destinationID": 2,
+        "travelers": 5,
+        "date": "2020/10/04",
+        "duration": 18,
+        "status": "pending",
+        "suggestedActivities": []
+      },
+      {
+        "id": 3,
+        "userID": 2,
+        "destinationID": 3,
+        "travelers": 4,
+        "date": "2020/05/22",
+        "duration": 17,
+        "status": "pending",
+        "suggestedActivities": []
+      }
+    ]);
+  });
+
+  it('Should be able to find pending trips', () => {
+    expect(agency.findPendingTrips()).to.deep.equal(
+      [{
+        "id": 2,
+        "userID": 1,
+        "destinationID": 2,
+        "travelers": 5,
+        "date": "2020/10/04",
+        "duration": 18,
+        "status": "pending",
+        "suggestedActivities": []
+      },
+      {
+        "id": 3,
+        "userID": 2,
+        "destinationID": 3,
+        "travelers": 4,
+        "date": "2020/05/22",
+        "duration": 17,
+        "status": "pending",
+        "suggestedActivities": []
+      }
+    ]);
+  });
+
+  it('Should be able to calculate annual income', () => {
+    expect(agency.calculateAnnualIncome()).to.deep.equal(1171);
   });
 
 });
