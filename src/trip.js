@@ -33,6 +33,12 @@ class Trip {
     return diff/1000/60/60/24;
   }
 
+  calculateTripCost(destinationsData) {
+    let foundDestination = destinationsData.find(destination => destination.id === this.destinationID);
+    let lodgingCost = foundDestination.estimatedLodgingCostPerDay * this.duration;
+    let flightsCost = foundDestination.estimatedFlightCostPerPerson * this.travelers;
+    return ((lodgingCost + flightsCost) * 1.10).toFixed(2);
+  }
 }
 
 export default Trip;

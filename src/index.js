@@ -114,13 +114,10 @@ function createAgency() {
 function checkCompletion() {
   if(event.target.parentNode.classList.contains('book-trip-form') && document.querySelector('.book-trip-form').checkValidity()) {
     createTrip();
-    domUpdates.showCost();
-  } else {
-    domUpdates.showErrorMessage();
+    domUpdates.showCost(destinationsData, trip);
   }
 }
 
 function createTrip() {
   trip = new Trip(traveler, destinationsData);
-  console.log(trip)
 }

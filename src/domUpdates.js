@@ -139,7 +139,7 @@ let domUpdates = {
           <label class="book-label" for="location">location:</label>
           <input class="book-input location-input" aria-label="type location here" list="locations-data" placeholder="Enter location..." name="location" required>
           <label class="book-label" for="travelers">travelers:</label>
-          <input class="book-input travelers-number" type="number" min="1" max="100" aria-label="type number of travelers here" placeholder="Number of travelers" name="travelers" required>
+          <input class="book-input travelers-number" type="number" step="1" min="1" max="100" aria-label="type number of travelers here" placeholder="Number of travelers" name="travelers" required>
           <p class="book-label booking-cost">total cost: </p>
           <button class="book-trip-button" type="submit">submit</button>
         </form>
@@ -159,12 +159,11 @@ let domUpdates = {
     )
   },
 
-  showCost() {
-
-  },
-
-  showErrorMessage() {
-
+  showCost(destinationsData, trip) {
+    let totalCost = trip.calculateTripCost(destinationsData);
+    $('.booking-cost').append(
+      `$${totalCost}`
+    )
   },
 
   showAgentDashboard(){
