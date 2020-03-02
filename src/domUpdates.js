@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import moment from 'moment';
+// require("jquery-html5-validity")($);
 
 let domUpdates = {
   showTravelerDashboard(traveler){
@@ -130,15 +131,15 @@ let domUpdates = {
         <h3>BOOK A TRIP:</h3>
         <form class="book-trip-form">
           <label class="book-label" for="start date">start date:</label>
-          <input class="book-input" type="date" aria-label="select start date here" name="start" min="${today}">
+          <input class="book-input departure-date" type="date" aria-label="select start date here" name="start" min="${today}" required>
           </input>
           <label class="book-label" for="end date">end date:</label>
-          <input class="book-input" type="date" aria-label="select end date here" name="end" min="${today}">
+          <input class="book-input return-date" type="date" aria-label="select end date here" name="end" min="${today}" required>
           </input>
           <label class="book-label" for="location">location:</label>
-          <input class="book-input" aria-label="type location here" list="locations-data" placeholder="Enter location..." name="location">
+          <input class="book-input location-input" aria-label="type location here" list="locations-data" placeholder="Enter location..." name="location" required>
           <label class="book-label" for="travelers">travelers:</label>
-          <input class="book-input" type="number" min="1" max="100" aria-label="type number of travelers here" placeholder="Number of travelers" name="travelers">
+          <input class="book-input travelers-number" type="number" min="1" max="100" aria-label="type number of travelers here" placeholder="Number of travelers" name="travelers" required>
           <p class="book-label booking-cost">total cost: </p>
           <button class="book-trip-button" type="submit">submit</button>
         </form>
@@ -149,13 +150,21 @@ let domUpdates = {
     this.createDataList(destinationsData);
   },
 
-  createDataList(destinationsData){
+  createDataList(destinationsData) {
     let destinationsList = destinationsData.map(destination => {
       return `<option value="${destination.destination}">`
     })
     $('#locations-data').append(
       `${destinationsList.join("")}`
     )
+  },
+
+  showCost() {
+
+  },
+
+  showErrorMessage() {
+
   },
 
   showAgentDashboard(){
