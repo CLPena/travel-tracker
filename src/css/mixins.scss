@@ -41,3 +41,22 @@
   color: white;
   cursor: pointer;
 }
+
+@mixin button-defaults {
+  background-color: $transparent-white;
+  @include clay-border;
+  color: $eggplant;
+  margin: 5px;
+  padding: 5px;
+  &:hover {
+    @include clay-hover;
+  }
+}
+
+@mixin input-defaults {
+  background-color: $transparent-white;
+  @include clay-border;
+  font-size: 16px;
+  height: 30px;
+  margin: 5px;
+}

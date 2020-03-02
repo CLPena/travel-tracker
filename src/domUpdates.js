@@ -122,6 +122,23 @@ let domUpdates = {
     }
   },
 
+  createBookTripWidget(tripFinder) {
+      $('.user-dashboard').append(
+        `<div class="book-trip-widget">
+          <h3>BOOK A TRIP:</h3>
+          <form class="book-trip-form">
+            <label class="book-label" for="start date">start date:</label>
+            <input class="date-input" type="date" aria-label="select start date here" name="start">
+            </input>
+            <label class="book-label" for="end date">end date:</label>
+            <input class="date-input" type="date" aria-label="select end date here" name="end">
+            </input>
+            <button class="book-trip-button" type="submit">submit</button>
+          </form>
+        </div>`
+      )
+  },
+
   showAgentDashboard(){
     $('header').append(`<h2 class="banner-welcome"> Welcome, Travel Agent! </h2>`);
     $('main').append(

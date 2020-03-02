@@ -1,7 +1,6 @@
 @import 'variables';
 @import 'mixins';
 
-
 html {
   height: 100vh;
   @include regular-font;
@@ -77,13 +76,24 @@ h3 {
   width: 300px;
 }
 
+.book-trip-form {
+  @include basic-flex(column nowrap)
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .login-input {
-  background-color: $transparent-white;
-  @include clay-border;
-  font-size: 16px;
-  height: 30px;
-  margin: 5px;
+  @include input-defaults;
   width: 75%;
+}
+
+.date-input {
+  @include input-defaults;
+  width: 90%;
 }
 
 label, button {
@@ -91,16 +101,19 @@ label, button {
   @include bold-font;
 }
 
+.book-label {
+  font-size: 16px;
+  @include margin-bottom-top(2px, 5px)
+}
+
 .submit-button {
-  background-color: $transparent-white;
-  @include clay-border;
-  color: $eggplant;
-  margin: 5px;
-  padding: 5px;
+  @include button-defaults;
   width: 30%;
-  &:hover {
-    @include clay-hover;
-  }
+}
+
+.book-trip-button {
+  @include button-defaults;
+  width: 70%;
 }
 
 .hidden {
@@ -136,7 +149,7 @@ label, button {
   overflow-y: scroll;
 }
 
-.traveler-trips, .cost-widget, .traveler-info {
+.traveler-trips, .cost-widget, .traveler-info, .book-trip-widget {
   background-color: $transparent-white;
   @include clay-border;
   @include basic-flex(column nowrap);

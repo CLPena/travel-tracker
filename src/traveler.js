@@ -8,6 +8,10 @@ class Traveler {
     this.pendingTrips = [];
   }
 
+  bookTrip() {
+    
+  }
+
 }
 
 export default Traveler;
