@@ -51,7 +51,6 @@ let loginForm = document.querySelector('.login-form');
 
 function preventReload(e) {
   e.preventDefault();
-  // checkPassword();
 };
 
 function checkPassword() {
@@ -94,7 +93,7 @@ function createTraveler(id) {
   traveler = new Traveler(foundTraveler.id, foundTraveler.name, foundTraveler.travelerType);
   let tripFinder = new TripFinder(traveler, tripsData, destinationsData, travelersData);
   domUpdates.showTravelerDashboard(traveler);
-  domUpdates.createBookTripWidget(tripFinder);
+  domUpdates.createBookTripWidget(destinationsData);
   domUpdates.createCurrentTripWidget(tripFinder, destinationsData);
   domUpdates.createUpcomingTripsWidget(tripFinder, destinationsData);
   domUpdates.createPastTripsWidget(tripFinder, destinationsData);

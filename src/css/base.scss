@@ -91,7 +91,7 @@ h3 {
   width: 75%;
 }
 
-.date-input {
+.book-input {
   @include input-defaults;
   width: 90%;
 }
@@ -101,18 +101,20 @@ label, button {
   @include bold-font;
 }
 
+button {
+  @include button-defaults;
+}
+
 .book-label {
   font-size: 16px;
   @include margin-bottom-top(2px, 5px)
 }
 
 .submit-button {
-  @include button-defaults;
   width: 30%;
 }
 
 .book-trip-button {
-  @include button-defaults;
   width: 70%;
 }
 
