@@ -44,6 +44,23 @@ class Agency extends Finder{
     return this.allTrips.filter(trip => trip.status === "pending");
   }
 
+  approveTrip(tripID) {
+    let tripObject = {
+      id: tripID,
+      status: "approved",
+    }
+    return fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/updateTrip", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(tripObject)
+      })
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(error => console.log(error.message))
+  }
+
 }
 
 

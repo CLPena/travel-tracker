@@ -35,7 +35,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips pending-trips">
+      `<div class="traveler-trips">
         <h3>PENDING TRIPS:</h3>
         <p class="info">${travelerPendingTrips}</p>
       </div>`
@@ -216,14 +216,14 @@ let domUpdates = {
     if (agency.pendingTrips.length) {
       agencyPendingTrips = (agency.pendingTrips.map(trip => {
       return `
+      <div class="pending-trips" id="${trip.id}">
         <p class="bold destination">traveler: ${(travelersData.find(traveler => traveler.id === trip.userID)).name}</p>
         <p class="trip-info destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
         <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
         <p class="trip-info">travelers: ${trip.travelers}</p>
-        <span class="pending-trip-buttons">
-          <button class="approve"></button>
-          <button class="deny"></button>
-        </span>
+          <button type="button" class="approve"></button>
+          <button type="button" class="deny"></button>
+      </div>
       `
       })).join(" ")
     } else {
@@ -294,21 +294,22 @@ let domUpdates = {
     let tripsList = tripFinder.findTripsForTraveler(foundTraveler);
     return (tripsList.map(trip => {
       if(trip.status === "approved") {
-        return `
+        return `<div class="pending-trips" id="${trip.id}">
           <p class="bold">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
           <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
           <p class="trip-info">travelers: ${trip.travelers}</p>
           <p class="trip-info">status: ${trip.status}</p>
+        </div>
           `
       } else {
-        return `<p class="bold">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+        return `<div class="pending-trips" id="${trip.id}">
+        <p class="bold">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
         <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
         <p class="trip-info">travelers: ${trip.travelers}</p>
         <p class="trip-info">status: ${trip.status}</p>
-        <span class="pending-trip-buttons">
-          <button class="approve"></button>
-          <button class="deny"></button>
-        </span>
+        <button type="button" class="approve"></button>
+        <button type="button" class="deny"></button>
+        </div>
         `
       }
     })).join("")

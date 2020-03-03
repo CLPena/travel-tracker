@@ -42,7 +42,7 @@ Promise.all([travelersData, tripsData, destinationsData])
   .catch(error => console.log(error.message))
 
 // DECLARE VARIABLES //
-let traveler, trip, destination, agency, tripFinder, bookTripForm, searchTravelersForm, currentTravelerID;
+let traveler, pendingTripDivs, trip, destination, agency, tripFinder, bookTripForm, searchTravelersForm, currentTravelerID;
 let loginMain = document.querySelector('.login-screen');
 let loginSubmitButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
@@ -111,6 +111,8 @@ function createAgency() {
   domUpdates.createTravelersTodayWidget(agency);
   domUpdates.createPendingTripsAgencyWidget(agency, destinationsData, travelersData);
   domUpdates.createViewTravelerInfoWidget(travelersData);
+  pendingTripDivs = document.querySelectorAll('.pending-trips');
+  pendingTripDivs.forEach(div => div.addEventListener('click', handleApproveOrDeny))
 }
 
 function checkSearchValidity() {
@@ -122,6 +124,8 @@ function checkSearchValidity() {
 
 function handleSearchSubmit(event) {
   domUpdates.displayTraveler(event, tripsData, destinationsData, travelersData);
+  pendingTripDivs = document.querySelectorAll('.pending-trips');
+  pendingTripDivs.forEach(div => div.addEventListener('click', handleApproveOrDeny))
 }
 
 function checkCompletion() {
@@ -141,6 +145,7 @@ function handleSubmit() {
   currentTravelerID = traveler.id;
   traveler.bookTrip(trip)
   .then(() => refreshData())
+  .then(() => createTraveler(currentTravelerID))
 }
 
 function refreshData() {
@@ -165,7 +170,31 @@ function refreshData() {
       tripsData = data[1];
       destinationsData = data[2];
       domUpdates.clearMain();
-      createTraveler(currentTravelerID);
     })
     .catch(error => console.log(error.message))
 }
+
+function handleApproveOrDeny() {
+  if(event.target.classList.contains('approve')) {
+    handleApproveTrip(event);
+  } else if(event.target.classList.contains('deny')) {
+    console.log("DENY")
+  }
+}
+
+function handleApproveTrip(event) {
+  let tripID = parseInt(event.target.parentNode.id);
+  agency.approveTrip(tripID)
+  .then(() => refreshData())
+  .then(() => domUpdates.clearMain())
+  .then(() => createAgency())
+}
+
+//add event listener to approve and deny buttons
+//if approve - post trip change (see below), clear dashboard, refresh data, recreate agency dashboard
+//if deny - find corresponding trip in local tripsData, delete trip from database, refresh data, clear dashboard, recreate agency dashboard
+
+// Modify single trip	https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/updateTrip
+// POST
+// {id: <number>, status:<String of 'approved' or 'pending', suggestedActivities: <Array of strings>}
+// Only a status or a suggestedActivities property is required for a successful request	{message: 'Trip #<id> has been modified', updatedResource: <Object with newly updated data>}
