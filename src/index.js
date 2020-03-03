@@ -37,11 +37,12 @@ Promise.all([travelersData, tripsData, destinationsData])
     document.addEventListener('submit', preventReload);
     loginForm.addEventListener('submit', checkPassword);
     document.addEventListener('change', checkCompletion);
+    document.addEventListener('change', checkSearchValidity);
   })
   .catch(error => console.log(error.message))
 
 // DECLARE VARIABLES //
-let traveler, trip, destination, agency, tripFinder, bookTripForm, currentTravelerID;
+let traveler, trip, destination, agency, tripFinder, bookTripForm, searchTravelersForm, currentTravelerID;
 let loginMain = document.querySelector('.login-screen');
 let loginSubmitButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
@@ -110,6 +111,17 @@ function createAgency() {
   domUpdates.createTravelersTodayWidget(agency);
   domUpdates.createPendingTripsAgencyWidget(agency, destinationsData, travelersData);
   domUpdates.createViewTravelerInfoWidget(travelersData);
+}
+
+function checkSearchValidity() {
+  if(event.target.parentNode.classList.contains('find-traveler-form') && document.querySelector('.find-traveler-form').checkValidity()) {
+    searchTravelersForm = document.querySelector('.find-traveler-form');
+    searchTravelersForm.addEventListener('submit', handleSearchSubmit);
+  }
+}
+
+function handleSearchSubmit(event) {
+  domUpdates.displayTraveler(event, tripsData, destinationsData, travelersData);
 }
 
 function checkCompletion() {

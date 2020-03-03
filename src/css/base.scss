@@ -207,6 +207,21 @@ button {
   border: none;
 }
 
-.pending-trip-container {
-  // @include basic-flex(column wrap)
+.traveler-snapshot {
+  @include basic-flex(column nowrap);
+  width: 90%;
+  padding: 1em;
+  margin: 0;
+  .bold {
+    margin-top: 8px;
+  }
+}
+
+.find-traveler-form {
+  width: 100%;
+  @include no-margin-padding;
+}
+
+.traveler-input {
+  margin: 0;
 }

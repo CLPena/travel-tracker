@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import moment from 'moment';
+import TripFinder from './tripFinder';
+
 
 let domUpdates = {
   showTravelerDashboard(traveler){
@@ -237,13 +239,14 @@ let domUpdates = {
 
   createViewTravelerInfoWidget(travelersData) {
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="traveler-trips traveler-info">
         <h3>VIEW TRAVELER INFORMATION:</h3>
         <form class="find-traveler-form">
           <label class="traveler-label" for="traveler">traveler name:</label>
           <input class="book-input traveler-input" aria-label="type traveler here" list="travelers-data" placeholder="Enter traveler name..." name="traveler" required>
           <button class="find-traveler-button" type="submit">submit</button>
         </form>
+        <div class="trips-list"></div>
       </div>
       <datalist id="travelers-data">
       </datalist>`
@@ -270,6 +273,45 @@ let domUpdates = {
       $('.banner-welcome').remove();
     }
     $('.login-screen').addClass('hidden');
+  },
+
+  displayTraveler(event, tripsData, destinationsData, travelersData) {
+    let foundTraveler = travelersData.find(traveler => traveler.name === $('.traveler-input').val());
+    let tripFinder = new TripFinder(foundTraveler, tripsData, destinationsData, travelersData);
+
+    $('.trips-list').empty()
+    $('.trips-list').append(
+      `<div class="traveler-snapshot">
+        <p class="bold">id: ${foundTraveler.id}</p>
+        <p class="bold">traveler type: ${foundTraveler.travelerType}</p>
+        <p class="bold">yearly travel spending: $${tripFinder.annualCost}</p>
+        <p class="bold">all trips: ${this.displayAllTrips(foundTraveler, destinationsData, tripFinder)}</p>
+      </div>
+      `    )
+  },
+
+  displayAllTrips(foundTraveler, destinationsData, tripFinder) {
+    let tripsList = tripFinder.findTripsForTraveler(foundTraveler);
+    return (tripsList.map(trip => {
+      if(trip.status === "approved") {
+        return `
+          <p class="bold">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+          <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
+          <p class="trip-info">travelers: ${trip.travelers}</p>
+          <p class="trip-info">status: ${trip.status}</p>
+          `
+      } else {
+        return `<p class="bold">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+        <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
+        <p class="trip-info">travelers: ${trip.travelers}</p>
+        <p class="trip-info">status: ${trip.status}</p>
+        <span class="pending-trip-buttons">
+          <button class="approve"></button>
+          <button class="deny"></button>
+        </span>
+        `
+      }
+    })).join("")
   }
 
 }
