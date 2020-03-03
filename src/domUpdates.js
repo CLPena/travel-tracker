@@ -40,10 +40,6 @@ let domUpdates = {
     )
   },
 
-  // refreshPendingTrips(tripFinder, tripsData, destinationsData) {
-  //   $('.pending-trips').remove();
-  // },
-
   createUpcomingTripsWidget(tripFinder, destinationsData) {
     let travelerUpcomingTrips;
 
@@ -217,10 +213,15 @@ let domUpdates = {
     let agencyPendingTrips;
     if (agency.pendingTrips.length) {
       agencyPendingTrips = (agency.pendingTrips.map(trip => {
-      return `<p class="bold destination">traveler: ${(travelersData.find(traveler => traveler.id === trip.userID)).name}</p>
-      <p class="trip-info destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
-      <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
-      <p class="trip-info">travelers: ${trip.travelers}</p>
+      return
+      `<span class="pending-trip-container">
+        <p class="bold destination">traveler: ${(travelersData.find(traveler => traveler.id === trip.userID)).name}</p>
+        <p class="trip-info destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+        <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
+        <p class="trip-info">travelers: ${trip.travelers}</p>
+        <button class="approve"></button>
+        <button class="deny"></button>
+      </span>
       `
       })).join(" ")
     } else {

@@ -184,3 +184,13 @@ button {
   @include margin-bottom-top(0, 0)
   margin-right: 5%;
 }
+
+.approve {
+  background-color: $light-blue;
+  background-image: url(../images/approve.jpg);
+}
+
+.deny {
+  background-color: $light-blue;
+  background-image: url(../images/deny.jpg);
+}
