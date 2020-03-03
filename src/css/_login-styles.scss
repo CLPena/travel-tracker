@@ -1,0 +1,26 @@
+//LOGIN
+.pin {
+  height: 1em;
+}
+
+.login-input {
+  @include input-defaults;
+  width: 75%;
+}
+
+.login-form {
+  align-items: center;
+  background-color: $transparent-white;
+  @include clay-border;
+  @include basic-flex(column nowrap) height: 350px;
+  justify-content: space-around;
+  margin: 0;
+  padding: 1em;
+  width: 300px;
+}
+
+.error-message {
+  @include clay-border;
+  padding: 1em;
+  width: 75%;
+}

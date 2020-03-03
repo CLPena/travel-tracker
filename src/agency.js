@@ -1,7 +1,7 @@
 import Finder from './Finder';
 import moment from 'moment'
 
-class Agency extends Finder{
+class Agency extends Finder {
   constructor(tripsData, destinationsData, travelersData) {
     super(tripsData, destinationsData, travelersData);
     this.allTrips = tripsData;
@@ -15,7 +15,7 @@ class Agency extends Finder{
   findTravelersToday() {
     let currentDate = moment().format("YYYY/MM/DD");
     let currentTrips = this.allTrips.filter(trip =>
-      (moment(trip.date).isSameOrBefore(currentDate, "day") &&  moment(trip.date).add(trip.duration, "days").isSameOrAfter(currentDate)))
+      (moment(trip.date).isSameOrBefore(currentDate, "day") && moment(trip.date).add(trip.duration, "days").isSameOrAfter(currentDate)))
     return currentTrips.reduce((travelers, trip) => {
       travelers += trip.travelers;
       return travelers;
@@ -50,11 +50,11 @@ class Agency extends Finder{
       status: "approved",
     }
     return fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/updateTrip", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(tripObject)
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tripObject)
       })
       .then(response => response.json())
       .then(response => console.log(response))
@@ -66,17 +66,16 @@ class Agency extends Finder{
       id: tripID,
     }
     return fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips", {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(tripObject)
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tripObject)
       })
       .then(response => response.json())
       .then(response => console.log(response))
       .catch(error => console.log(error.message))
   }
-
 }
 
 

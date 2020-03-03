@@ -1,0 +1,36 @@
+//AGENCY DASHBOARD
+
+.destination {
+  @include margin-bottom-top(0, 8px)
+}
+
+.trip-info {
+  @include margin-bottom-top(2px, 0)
+}
+
+.approve {
+  @include approve-and-deny-buttons(url("../images/approve.png"))
+}
+
+.deny {
+  @include approve-and-deny-buttons(url("../images/deny.png"))
+}
+
+.traveler-snapshot {
+  @include basic-flex(column nowrap);
+  width: 90%;
+  padding: 1em;
+  margin: 0;
+  .bold {
+    margin-top: 8px;
+  }
+}
+
+.find-traveler-form {
+  width: 100%;
+  @include no-margin-padding;
+}
+
+.traveler-input {
+  margin: 0;
+}

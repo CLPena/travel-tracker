@@ -14,8 +14,7 @@ class Trip {
   }
 
   findDestinationID(destinationsData) {
-    let foundDestination = destinationsData.find(destination => destination.destination === $('.location-input').val()
-    );
+    let foundDestination = destinationsData.find(destination => destination.destination === $('.location-input').val());
     return foundDestination.id;
   }
 
@@ -32,7 +31,7 @@ class Trip {
     let start = new Date($('.departure-date').val());
     let end = new Date($('.return-date').val());
     let diff = new Date(end - start);
-    return diff/1000/60/60/24;
+    return diff / 1000 / 60 / 60 / 24;
   }
 
   calculateTripCost(destinationsData) {
