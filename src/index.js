@@ -126,30 +126,8 @@ function createTrip() {
 
 function handleSubmit() {
   currentTravelerID = traveler.id;
-  submitTrip(currentTravelerID);
-}
-
-function submitTrip() {
-  let tripObject = {
-    id: trip.id,
-    userID: trip.userID,
-    destinationID: trip.destinationID,
-    travelers: trip.travelers,
-    date: trip.date,
-    duration: trip.duration,
-    status: trip.status,
-    suggestedActivities: trip.suggestedActivities
-  }
-  fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(tripObject)
-  })
-  .then(response => response.json())
+  traveler.bookTrip(trip)
   .then(() => refreshData())
-  .catch(error => console.log(error.message))
 }
 
 function refreshData() {
