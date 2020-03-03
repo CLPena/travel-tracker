@@ -186,11 +186,27 @@ button {
 }
 
 .approve {
-  background-color: $light-blue;
-  background-image: url(../images/approve.jpg);
+  background-color: transparent;
+  background-image: url(../images/approve.png);
+  background-size: contain;
+  height: 1.5em;
+  width: 1.5em;
+  margin: 2px;
+  border-radius: 100%;
+  border: none;
 }
 
 .deny {
-  background-color: $light-blue;
-  background-image: url(../images/deny.jpg);
+  background-color: transparent;
+  background-image: url(../images/deny.png);
+  background-size: contain;
+  height: 1.5em;
+  width: 1.5em;
+  margin: 2px;
+  border-radius: 100%;
+  border: none;
+}
+
+.pending-trip-container {
+  // @include basic-flex(column wrap)
 }

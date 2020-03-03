@@ -213,21 +213,20 @@ let domUpdates = {
     let agencyPendingTrips;
     if (agency.pendingTrips.length) {
       agencyPendingTrips = (agency.pendingTrips.map(trip => {
-      return
-      `<span class="pending-trip-container">
+      return `
         <p class="bold destination">traveler: ${(travelersData.find(traveler => traveler.id === trip.userID)).name}</p>
         <p class="trip-info destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
         <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
         <p class="trip-info">travelers: ${trip.travelers}</p>
-        <button class="approve"></button>
-        <button class="deny"></button>
-      </span>
+        <span class="pending-trip-buttons">
+          <button class="approve"></button>
+          <button class="deny"></button>
+        </span>
       `
       })).join(" ")
     } else {
       agencyPendingTrips = `<p class="bold destination">no pending trips!</p>`
     }
-
     $('.user-dashboard').append(
       `<div class="traveler-trips">
         <h3>PENDING TRIPS:</h3>
