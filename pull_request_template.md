@@ -20,6 +20,7 @@
 - [ ] index.html
 - [ ] index.js
 - [ ] traveler.js
+- [ ] trip.js
 - [ ] tripFinder.js
 #### css
 - [ ] base.scss
@@ -30,4 +31,5 @@
 - [ ] destination-test.js
 - [ ] finder-test.js
 - [ ] traveler-test.js
+- [ ] trip-test.js
 - [ ] tripFinder-test.js
