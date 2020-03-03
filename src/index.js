@@ -178,7 +178,7 @@ function handleApproveOrDeny() {
   if(event.target.classList.contains('approve')) {
     handleApproveTrip(event);
   } else if(event.target.classList.contains('deny')) {
-    console.log("DENY")
+    handleDenyTrip(event);
   }
 }
 
@@ -190,11 +190,10 @@ function handleApproveTrip(event) {
   .then(() => createAgency())
 }
 
-//add event listener to approve and deny buttons
-//if approve - post trip change (see below), clear dashboard, refresh data, recreate agency dashboard
-//if deny - find corresponding trip in local tripsData, delete trip from database, refresh data, clear dashboard, recreate agency dashboard
-
-// Modify single trip	https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/updateTrip
-// POST
-// {id: <number>, status:<String of 'approved' or 'pending', suggestedActivities: <Array of strings>}
-// Only a status or a suggestedActivities property is required for a successful request	{message: 'Trip #<id> has been modified', updatedResource: <Object with newly updated data>}
+function handleDenyTrip(event) {
+  let tripID = parseInt(event.target.parentNode.id);
+  agency.denyTrip(tripID)
+  .then(() => refreshData())
+  .then(() => domUpdates.clearMain())
+  .then(() => createAgency())
+}

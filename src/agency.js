@@ -61,6 +61,22 @@ class Agency extends Finder{
       .catch(error => console.log(error.message))
   }
 
+  denyTrip(tripID) {
+    let tripObject = {
+      id: tripID,
+    }
+    return fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips", {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(tripObject)
+      })
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(error => console.log(error.message))
+  }
+
 }
 
 
