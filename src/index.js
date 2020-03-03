@@ -109,6 +109,7 @@ function createAgency() {
   domUpdates.createAgencyIncomeWidget(agency);
   domUpdates.createTravelersTodayWidget(agency);
   domUpdates.createPendingTripsAgencyWidget(agency, destinationsData, travelersData);
+  domUpdates.createViewTravelerInfoWidget(travelersData);
 }
 
 function checkCompletion() {

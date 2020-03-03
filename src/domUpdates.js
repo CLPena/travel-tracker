@@ -235,6 +235,31 @@ let domUpdates = {
     )
   },
 
+  createViewTravelerInfoWidget(travelersData) {
+    $('.user-dashboard').append(
+      `<div class="traveler-trips">
+        <h3>VIEW TRAVELER INFORMATION:</h3>
+        <form class="find-traveler-form">
+          <label class="traveler-label" for="traveler">traveler name:</label>
+          <input class="book-input traveler-input" aria-label="type traveler here" list="travelers-data" placeholder="Enter traveler name..." name="traveler" required>
+          <button class="find-traveler-button" type="submit">submit</button>
+        </form>
+      </div>
+      <datalist id="travelers-data">
+      </datalist>`
+    )
+    this.createTravelerData(travelersData);
+  },
+
+  createTravelerData(travelersData) {
+    let travelersList = travelersData.map(traveler => {
+      return `<option value="${traveler.name}">`
+    })
+    $('#travelers-data').append(
+      `${travelersList.join("")}`
+    )
+  },
+
   displayError() {
       $('.error-message').removeClass('hidden');
   },
