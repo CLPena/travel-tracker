@@ -61,3 +61,14 @@
   height: 30px;
   margin: 5px;
 }
+
+@mixin approve-and-deny-buttons($url) {
+  background-color: transparent;
+  background-image: $url;
+  background-size: contain;
+  height: 1.5em;
+  width: 1.5em;
+  margin: 2px;
+  border-radius: 100%;
+  border: none;
+}

@@ -35,7 +35,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="traveler-info">
         <h3>PENDING TRIPS:</h3>
         <p class="info">${travelerPendingTrips}</p>
       </div>`
@@ -57,7 +57,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="traveler-info">
         <h3>UPCOMING TRIPS:</h3>
         <p class="info">${travelerUpcomingTrips}</p>
       </div>`
@@ -79,7 +79,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="traveler-info">
         <h3>PAST TRIPS:</h3>
         <p class="info">${travelerPastTrips}</p>
       </div>`
@@ -100,7 +100,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="traveler-info">
         <h3>CURRENT TRIP:</h3>
         <p class="info">${travelerCurrentTrip}</p>
       </div>`
@@ -110,14 +110,14 @@ let domUpdates = {
   createCostOfTravelWidget(tripFinder) {
     if (tripFinder.annualCost === 0) {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="traveler-info">
           <h3>TRAVEL EXPENSES THIS YEAR:</h3>
           <p class="info">no travel expenses (yet)!</p>
         </div>`
       )
     } else {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="traveler-info">
           <h3>ANNUAL TRAVEL EXPENSES:</h3>
           <p class="info">$${tripFinder.annualCost}</p>
         </div>`
@@ -128,7 +128,7 @@ let domUpdates = {
   createBookTripWidget(destinationsData) {
     let today = moment().format("YYYY-MM-DD");
     $('.user-dashboard').append(
-      `<div class="book-trip-widget">
+      `<div class="traveler-info">
         <h3>BOOK A TRIP:</h3>
         <form class="book-trip-form">
           <label class="book-label" for="start date">start date:</label>
@@ -178,14 +178,14 @@ let domUpdates = {
   createAgencyIncomeWidget(agency) {
     if (agency.annualIncome === 0) {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="traveler-info">
           <h3>ANNUAL COMMISSION:</h3>
           <p class="info">no commission (yet)!</p>
         </div>`
       )
     } else {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="traveler-info">
           <h3>YOUR ANNUAL COMMISSION:</h3>
           <p class="info">$${agency.annualIncome}</p>
         </div>`
@@ -196,14 +196,14 @@ let domUpdates = {
   createTravelersTodayWidget(agency) {
     if (agency.travelersToday.length === 0) {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="traveler-info">
           <h3>NUMBER OF TRAVELERS TODAY:</h3>
           <p class="info">no travelers today!</p>
         </div>`
       )
     } else {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="traveler-info">
           <h3>NUMBER OF TRAVELERS TODAY:</h3>
           <p class="info">${agency.travelersToday}</p>
         </div>`
@@ -230,7 +230,7 @@ let domUpdates = {
       agencyPendingTrips = `<p class="bold destination">no pending trips!</p>`
     }
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="traveler-info">
         <h3>PENDING TRIPS:</h3>
         <p class="info">${agencyPendingTrips}</p>
       </div>`
@@ -239,7 +239,7 @@ let domUpdates = {
 
   createViewTravelerInfoWidget(travelersData) {
     $('.user-dashboard').append(
-      `<div class="traveler-trips traveler-info">
+      `<div class="traveler-info">
         <h3>VIEW TRAVELER INFORMATION:</h3>
         <form class="find-traveler-form">
           <label class="traveler-label" for="traveler">traveler name:</label>

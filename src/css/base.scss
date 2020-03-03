@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
+//UNIVERSAL
 html {
   height: 100vh;
   @include regular-font;
@@ -30,19 +31,19 @@ header {
   justify-content: space-between;
 }
 
-.logo-h1-container {
-  @include basic-flex(row nowrap);
-  @include no-margin-padding;
-}
-
-.banner-welcome {
-  margin-right: 25%;
-}
-
 main {
   align-items: center;
   @include basic-flex(row wrap)
   justify-content: space-around;
+}
+
+label, button {
+  font-size: 18px;
+  @include bold-font;
+}
+
+button {
+  @include button-defaults;
 }
 
 h1 {
@@ -55,67 +56,19 @@ h3 {
   margin-top: 0px;
 }
 
+.logo-h1-container {
+  @include basic-flex(row nowrap);
+  @include no-margin-padding;
+}
+
+.banner-welcome {
+  @include margin-bottom-top(0, 0)
+  margin-right: 5%;
+}
+
 .compass {
   height: 2.3em;
   margin: 0 5px;
-}
-
-.pin {
-  height: 1em;
-}
-
-.login-form {
-  align-items: center;
-  background-color: $transparent-white;
-  @include clay-border;
-  @include basic-flex(column nowrap)
-  height: 350px;
-  justify-content: space-around;
-  margin: 0;
-  padding: 1em;
-  width: 300px;
-}
-
-.book-trip-form {
-  @include basic-flex(column nowrap)
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.login-input {
-  @include input-defaults;
-  width: 75%;
-}
-
-.book-input {
-  @include input-defaults;
-  width: 90%;
-}
-
-label, button {
-  font-size: 18px;
-  @include bold-font;
-}
-
-button {
-  @include button-defaults;
-}
-
-.book-label {
-  font-size: 16px;
-  @include margin-bottom-top(2px, 5px)
-}
-
-.submit-button {
-  width: 30%;
-}
-
-.book-trip-button {
-  width: 70%;
 }
 
 .hidden {
@@ -129,12 +82,6 @@ button {
   height: 2em;
   margin: 0 5px;
   width: 2em;
-}
-
-.error-message {
-  @include clay-border;
-  padding: 1em;
-  width: 75%;
 }
 
 .user-dashboard {
@@ -151,14 +98,6 @@ button {
   overflow-y: scroll;
 }
 
-.traveler-trips, .cost-widget, .traveler-info, .book-trip-widget {
-  background-color: $transparent-white;
-  @include clay-border;
-  @include basic-flex(column nowrap);
-  padding: 1em;
-  margin: 1%;
-}
-
 .bold {
   @include bold-font;
   margin: 0;
@@ -172,6 +111,71 @@ button {
   @include margin-bottom-top(10px, 10px)
 }
 
+//LOGIN
+.pin {
+  height: 1em;
+}
+
+.login-input {
+  @include input-defaults;
+  width: 75%;
+}
+
+.login-form {
+  align-items: center;
+  background-color: $transparent-white;
+  @include clay-border;
+  @include basic-flex(column nowrap)
+  height: 350px;
+  justify-content: space-around;
+  margin: 0;
+  padding: 1em;
+  width: 300px;
+}
+
+.error-message {
+  @include clay-border;
+  padding: 1em;
+  width: 75%;
+}
+
+//TRAVELER DASHBOARD
+.book-trip-form {
+  @include basic-flex(column nowrap)
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.book-input {
+  @include input-defaults;
+  width: 90%;
+}
+
+.book-label {
+  font-size: 16px;
+  @include margin-bottom-top(2px, 5px)
+}
+
+.submit-button {
+  width: 30%;
+}
+
+.book-trip-button {
+  width: 70%;
+}
+
+.traveler-info {
+  background-color: $transparent-white;
+  @include clay-border;
+  @include basic-flex(column nowrap);
+  padding: 1em;
+  margin: 1%;
+}
+
 .destination {
   @include margin-bottom-top(0, 8px)
 }
@@ -180,31 +184,12 @@ button {
   @include margin-bottom-top(2px, 0)
 }
 
-.banner-welcome {
-  @include margin-bottom-top(0, 0)
-  margin-right: 5%;
-}
-
 .approve {
-  background-color: transparent;
-  background-image: url(../images/approve.png);
-  background-size: contain;
-  height: 1.5em;
-  width: 1.5em;
-  margin: 2px;
-  border-radius: 100%;
-  border: none;
+  @include approve-and-deny-buttons(url(../images/approve.png))
 }
 
 .deny {
-  background-color: transparent;
-  background-image: url(../images/deny.png);
-  background-size: contain;
-  height: 1.5em;
-  width: 1.5em;
-  margin: 2px;
-  border-radius: 100%;
-  border: none;
+  @include approve-and-deny-buttons(url(../images/deny.png))
 }
 
 .traveler-snapshot {
