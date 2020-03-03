@@ -1,6 +1,7 @@
 import domUpdates from './domUpdates';
 import Destination from './destination';
 import Traveler from './traveler';
+import Trip from './trip';
 import TripFinder from './tripFinder';
 import Finder from './Finder';
 import Agency from './agency';
@@ -33,12 +34,14 @@ Promise.all([travelersData, tripsData, destinationsData])
     tripsData = data[1];
     destinationsData = data[2];
 
-    loginForm.addEventListener('submit', preventReload)
+    document.addEventListener('submit', preventReload);
+    loginForm.addEventListener('submit', checkPassword);
+    document.addEventListener('change', checkCompletion);
   })
   .catch(error => console.log(error.message))
 
 // DECLARE VARIABLES //
-let traveler, trip, destination, agency;
+let traveler, trip, destination, agency, tripFinder, bookTripForm, currentTravelerID;
 let loginMain = document.querySelector('.login-screen');
 let loginSubmitButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
@@ -50,7 +53,6 @@ let loginForm = document.querySelector('.login-form');
 
 function preventReload(e) {
   e.preventDefault();
-  checkPassword();
 };
 
 function checkPassword() {
@@ -91,8 +93,9 @@ function checkRange(id) {
 function createTraveler(id) {
   let foundTraveler = travelersData.find(traveler => traveler.id === id);
   traveler = new Traveler(foundTraveler.id, foundTraveler.name, foundTraveler.travelerType);
-  let tripFinder = new TripFinder(traveler, tripsData, destinationsData, travelersData);
+  tripFinder = new TripFinder(traveler, tripsData, destinationsData, travelersData);
   domUpdates.showTravelerDashboard(traveler);
+  domUpdates.createBookTripWidget(destinationsData);
   domUpdates.createCurrentTripWidget(tripFinder, destinationsData);
   domUpdates.createUpcomingTripsWidget(tripFinder, destinationsData);
   domUpdates.createPastTripsWidget(tripFinder, destinationsData);
@@ -101,9 +104,55 @@ function createTraveler(id) {
 }
 
 function createAgency() {
-  let agency = new Agency(tripsData, destinationsData, travelersData);
+  agency = new Agency(tripsData, destinationsData, travelersData);
   domUpdates.showAgentDashboard();
   domUpdates.createAgencyIncomeWidget(agency);
   domUpdates.createTravelersTodayWidget(agency);
   domUpdates.createPendingTripsAgencyWidget(agency, destinationsData, travelersData);
+}
+
+function checkCompletion() {
+  if(event.target.parentNode.classList.contains('book-trip-form') && document.querySelector('.book-trip-form').checkValidity()) {
+    createTrip();
+    domUpdates.showCost(destinationsData, trip);
+    bookTripForm = document.querySelector('.book-trip-form');
+    bookTripForm.addEventListener('submit', handleSubmit);
+  }
+}
+
+function createTrip() {
+  trip = new Trip(traveler, destinationsData);
+}
+
+function handleSubmit() {
+  currentTravelerID = traveler.id;
+  traveler.bookTrip(trip)
+  .then(() => refreshData())
+}
+
+function refreshData() {
+  travelersData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/travelers/travelers')
+    .then(response => response.json())
+    .then(data => data.travelers)
+    .catch(error => console.log(error.message))
+
+  tripsData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips')
+    .then(response => response.json())
+    .then(data => data.trips)
+    .catch(error => console.log(error.message));
+
+  destinationsData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/destinations/destinations')
+    .then(response => response.json())
+    .then(data => data.destinations)
+    .catch(error => console.log(error.message));
+
+  return Promise.all([travelersData, tripsData, destinationsData])
+    .then(data => {
+      travelersData = data[0];
+      tripsData = data[1];
+      destinationsData = data[2];
+      domUpdates.clearMain();
+      createTraveler(currentTravelerID);
+    })
+    .catch(error => console.log(error.message))
 }

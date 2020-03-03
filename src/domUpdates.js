@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import moment from 'moment';
 
 let domUpdates = {
   showTravelerDashboard(traveler){
@@ -32,12 +33,16 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="traveler-trips pending-trips">
         <h3>PENDING TRIPS:</h3>
         <p class="info">${travelerPendingTrips}</p>
       </div>`
     )
   },
+
+  // refreshPendingTrips(tripFinder, tripsData, destinationsData) {
+  //   $('.pending-trips').remove();
+  // },
 
   createUpcomingTripsWidget(tripFinder, destinationsData) {
     let travelerUpcomingTrips;
@@ -122,6 +127,48 @@ let domUpdates = {
     }
   },
 
+  createBookTripWidget(destinationsData) {
+    let today = moment().format("YYYY-MM-DD");
+    $('.user-dashboard').append(
+      `<div class="book-trip-widget">
+        <h3>BOOK A TRIP:</h3>
+        <form class="book-trip-form">
+          <label class="book-label" for="start date">start date:</label>
+          <input class="book-input departure-date" type="date" aria-label="select start date here" name="start" min="${today}" required>
+          </input>
+          <label class="book-label" for="end date">end date:</label>
+          <input class="book-input return-date" type="date" aria-label="select end date here" name="end" min="${today}" required>
+          </input>
+          <label class="book-label" for="location">location:</label>
+          <input class="book-input location-input" aria-label="type location here" list="locations-data" placeholder="Enter location..." name="location" required>
+          <label class="book-label" for="travelers">travelers:</label>
+          <input class="book-input travelers-number" type="number" step="1" min="1" max="100" aria-label="type number of travelers here" placeholder="Number of travelers" name="travelers" required>
+          <p class="book-label booking-cost">total cost: </p>
+          <button class="book-trip-button" type="submit">submit</button>
+        </form>
+      </div>
+      <datalist id="locations-data">
+      </datalist>`
+    )
+    this.createDataList(destinationsData);
+  },
+
+  createDataList(destinationsData) {
+    let destinationsList = destinationsData.map(destination => {
+      return `<option value="${destination.destination}">`
+    })
+    $('#locations-data').append(
+      `${destinationsList.join("")}`
+    )
+  },
+
+  showCost(destinationsData, trip) {
+    let totalCost = trip.calculateTripCost(destinationsData);
+    $('.booking-cost').append(
+      `$${totalCost}`
+    )
+  },
+
   showAgentDashboard(){
     $('header').append(`<h2 class="banner-welcome"> Welcome, Travel Agent! </h2>`);
     $('main').append(
@@ -168,7 +215,7 @@ let domUpdates = {
 
   createPendingTripsAgencyWidget(agency, destinationsData, travelersData) {
     let agencyPendingTrips;
-    if (agency.pendingTrips.length){
+    if (agency.pendingTrips.length) {
       agencyPendingTrips = (agency.pendingTrips.map(trip => {
       return `<p class="bold destination">traveler: ${(travelersData.find(traveler => traveler.id === trip.userID)).name}</p>
       <p class="trip-info destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
@@ -193,8 +240,12 @@ let domUpdates = {
   },
 
   clearMain() {
+    if ($('.user-dashboard')) {
+      $('.user-dashboard').remove();
+      $('.banner-welcome').remove();
+    }
     $('.login-screen').addClass('hidden');
-  },
+  }
 
 }
 
