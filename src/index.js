@@ -41,7 +41,7 @@ Promise.all([travelersData, tripsData, destinationsData])
   .catch(error => console.log(error.message))
 
 // DECLARE VARIABLES //
-let traveler, trip, destination, agency, tripFinder;
+let traveler, trip, destination, agency, tripFinder, bookTripForm, currentTravelerID;
 let loginMain = document.querySelector('.login-screen');
 let loginSubmitButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
@@ -115,9 +115,66 @@ function checkCompletion() {
   if(event.target.parentNode.classList.contains('book-trip-form') && document.querySelector('.book-trip-form').checkValidity()) {
     createTrip();
     domUpdates.showCost(destinationsData, trip);
+    bookTripForm = document.querySelector('.book-trip-form');
+    bookTripForm.addEventListener('submit', handleSubmit);
   }
 }
 
 function createTrip() {
   trip = new Trip(traveler, destinationsData);
+}
+
+function handleSubmit() {
+  currentTravelerID = traveler.id;
+  submitTrip(currentTravelerID);
+}
+
+function submitTrip() {
+  let tripObject = {
+    id: trip.id,
+    userID: trip.userID,
+    destinationID: trip.destinationID,
+    travelers: trip.travelers,
+    date: trip.date,
+    duration: trip.duration,
+    status: trip.status,
+    suggestedActivities: trip.suggestedActivities
+  }
+  fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(tripObject)
+  })
+  .then(response => response.json())
+  .then(() => refreshData())
+  .catch(error => console.log(error.message))
+}
+
+function refreshData() {
+  travelersData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/travelers/travelers')
+    .then(response => response.json())
+    .then(data => data.travelers)
+    .catch(error => console.log(error.message))
+
+  tripsData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips')
+    .then(response => response.json())
+    .then(data => data.trips)
+    .catch(error => console.log(error.message));
+
+  destinationsData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/destinations/destinations')
+    .then(response => response.json())
+    .then(data => data.destinations)
+    .catch(error => console.log(error.message));
+
+  return Promise.all([travelersData, tripsData, destinationsData])
+    .then(data => {
+      travelersData = data[0];
+      tripsData = data[1];
+      destinationsData = data[2];
+      domUpdates.clearMain();
+      createTraveler(currentTravelerID);
+    })
+    .catch(error => console.log(error.message))
 }

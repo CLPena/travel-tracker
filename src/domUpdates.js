@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import moment from 'moment';
-// require("jquery-html5-validity")($);
 
 let domUpdates = {
   showTravelerDashboard(traveler){
@@ -34,12 +33,16 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="traveler-trips pending-trips">
         <h3>PENDING TRIPS:</h3>
         <p class="info">${travelerPendingTrips}</p>
       </div>`
     )
   },
+
+  // refreshPendingTrips(tripFinder, tripsData, destinationsData) {
+  //   $('.pending-trips').remove();
+  // },
 
   createUpcomingTripsWidget(tripFinder, destinationsData) {
     let travelerUpcomingTrips;
@@ -212,7 +215,7 @@ let domUpdates = {
 
   createPendingTripsAgencyWidget(agency, destinationsData, travelersData) {
     let agencyPendingTrips;
-    if (agency.pendingTrips.length){
+    if (agency.pendingTrips.length) {
       agencyPendingTrips = (agency.pendingTrips.map(trip => {
       return `<p class="bold destination">traveler: ${(travelersData.find(traveler => traveler.id === trip.userID)).name}</p>
       <p class="trip-info destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
@@ -237,8 +240,12 @@ let domUpdates = {
   },
 
   clearMain() {
+    if ($('.user-dashboard')) {
+      $('.user-dashboard').remove();
+      $('.banner-welcome').remove();
+    }
     $('.login-screen').addClass('hidden');
-  },
+  }
 
 }
 

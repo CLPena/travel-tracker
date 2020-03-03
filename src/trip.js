@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import moment from 'moment';
 
 class Trip {
   constructor(traveler, destinationsData) {
@@ -23,7 +24,8 @@ class Trip {
   }
 
   getDate() {
-    return $('.departure-date').val()
+    let date = $('.departure-date').val()
+    return moment(date).format('YYYY/MM/DD');
   }
 
   calculateDuration() {
