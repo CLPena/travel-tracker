@@ -184,3 +184,44 @@ button {
   @include margin-bottom-top(0, 0)
   margin-right: 5%;
 }
+
+.approve {
+  background-color: transparent;
+  background-image: url(../images/approve.png);
+  background-size: contain;
+  height: 1.5em;
+  width: 1.5em;
+  margin: 2px;
+  border-radius: 100%;
+  border: none;
+}
+
+.deny {
+  background-color: transparent;
+  background-image: url(../images/deny.png);
+  background-size: contain;
+  height: 1.5em;
+  width: 1.5em;
+  margin: 2px;
+  border-radius: 100%;
+  border: none;
+}
+
+.traveler-snapshot {
+  @include basic-flex(column nowrap);
+  width: 90%;
+  padding: 1em;
+  margin: 0;
+  .bold {
+    margin-top: 8px;
+  }
+}
+
+.find-traveler-form {
+  width: 100%;
+  @include no-margin-padding;
+}
+
+.traveler-input {
+  margin: 0;
+}

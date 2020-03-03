@@ -37,11 +37,12 @@ Promise.all([travelersData, tripsData, destinationsData])
     document.addEventListener('submit', preventReload);
     loginForm.addEventListener('submit', checkPassword);
     document.addEventListener('change', checkCompletion);
+    document.addEventListener('change', checkSearchValidity);
   })
   .catch(error => console.log(error.message))
 
 // DECLARE VARIABLES //
-let traveler, trip, destination, agency, tripFinder, bookTripForm, currentTravelerID;
+let traveler, pendingTripDivs, trip, destination, agency, tripFinder, bookTripForm, searchTravelersForm, currentTravelerID;
 let loginMain = document.querySelector('.login-screen');
 let loginSubmitButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
@@ -109,6 +110,22 @@ function createAgency() {
   domUpdates.createAgencyIncomeWidget(agency);
   domUpdates.createTravelersTodayWidget(agency);
   domUpdates.createPendingTripsAgencyWidget(agency, destinationsData, travelersData);
+  domUpdates.createViewTravelerInfoWidget(travelersData);
+  pendingTripDivs = document.querySelectorAll('.pending-trips');
+  pendingTripDivs.forEach(div => div.addEventListener('click', handleApproveOrDeny))
+}
+
+function checkSearchValidity() {
+  if(event.target.parentNode.classList.contains('find-traveler-form') && document.querySelector('.find-traveler-form').checkValidity()) {
+    searchTravelersForm = document.querySelector('.find-traveler-form');
+    searchTravelersForm.addEventListener('submit', handleSearchSubmit);
+  }
+}
+
+function handleSearchSubmit(event) {
+  domUpdates.displayTraveler(event, tripsData, destinationsData, travelersData);
+  pendingTripDivs = document.querySelectorAll('.pending-trips');
+  pendingTripDivs.forEach(div => div.addEventListener('click', handleApproveOrDeny))
 }
 
 function checkCompletion() {
@@ -128,6 +145,7 @@ function handleSubmit() {
   currentTravelerID = traveler.id;
   traveler.bookTrip(trip)
   .then(() => refreshData())
+  .then(() => createTraveler(currentTravelerID))
 }
 
 function refreshData() {
@@ -152,7 +170,30 @@ function refreshData() {
       tripsData = data[1];
       destinationsData = data[2];
       domUpdates.clearMain();
-      createTraveler(currentTravelerID);
     })
     .catch(error => console.log(error.message))
+}
+
+function handleApproveOrDeny() {
+  if(event.target.classList.contains('approve')) {
+    handleApproveTrip(event);
+  } else if(event.target.classList.contains('deny')) {
+    handleDenyTrip(event);
+  }
+}
+
+function handleApproveTrip(event) {
+  let tripID = parseInt(event.target.parentNode.id);
+  agency.approveTrip(tripID)
+  .then(() => refreshData())
+  .then(() => domUpdates.clearMain())
+  .then(() => createAgency())
+}
+
+function handleDenyTrip(event) {
+  let tripID = parseInt(event.target.parentNode.id);
+  agency.denyTrip(tripID)
+  .then(() => refreshData())
+  .then(() => domUpdates.clearMain())
+  .then(() => createAgency())
 }

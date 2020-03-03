@@ -27,6 +27,7 @@ class Traveler {
       body: JSON.stringify(tripObject)
       })
       .then(response => response.json())
+      .then(response => console.log(response))
       .catch(error => console.log(error.message))
   }
 
