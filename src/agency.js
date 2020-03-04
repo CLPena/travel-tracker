@@ -48,7 +48,7 @@ class Agency extends Finder {
       id: tripID,
       status: "approved",
     }
-    return fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/updateTrip", {
+    return window.fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/updateTrip", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ class Agency extends Finder {
     let tripObject = {
       id: tripID,
     }
-    return fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips", {
+    return window.fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips", {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

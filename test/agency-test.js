@@ -1,4 +1,7 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
+const chai = require('chai');
+const spies = require('chai-spies');
+chai.use(spies);
 import moment from 'moment';
 
 import Agency from '../src/agency'
@@ -161,6 +164,20 @@ describe('Agency', function() {
 
   it('Should be able to calculate annual income', () => {
     expect(agency.calculateAnnualIncome()).to.deep.equal(1171);
+  });
+
+  it('Should be able to approve a trip', () => {
+    global.window = {};
+    chai.spy.on(window, 'fetch', () => new Promise((resolve, reject) => {}));
+    agency.approveTrip(tripsData[0].id)
+    expect(window.fetch).to.be.called(1);
+  });
+
+  it('Should be able to deny a trip', () => {
+    global.window = {};
+    chai.spy.on(window, 'fetch', () => new Promise((resolve, reject) => {}));
+    agency.denyTrip(tripsData[0].id)
+    expect(window.fetch).to.be.called(1);
   });
 
 });
