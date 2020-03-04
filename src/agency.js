@@ -1,7 +1,7 @@
 import Finder from './Finder';
 import moment from 'moment'
 
-class Agency extends Finder{
+class Agency extends Finder {
   constructor(tripsData, destinationsData, travelersData) {
     super(tripsData, destinationsData, travelersData);
     this.allTrips = tripsData;
@@ -15,7 +15,7 @@ class Agency extends Finder{
   findTravelersToday() {
     let currentDate = moment().format("YYYY/MM/DD");
     let currentTrips = this.allTrips.filter(trip =>
-      (moment(trip.date).isSameOrBefore(currentDate, "day") &&  moment(trip.date).add(trip.duration, "days").isSameOrAfter(currentDate)))
+      (moment(trip.date).isSameOrBefore(currentDate, "day") && moment(trip.date).add(trip.duration, "days").isSameOrAfter(currentDate)))
     return currentTrips.reduce((travelers, trip) => {
       travelers += trip.travelers;
       return travelers;
@@ -29,7 +29,6 @@ class Agency extends Finder{
 
   calculateAnnualIncome() {
     return this.annualTrips.reduce((totalIncome, trip) => {
-      let duration = trip.duration;
       let destination = this.destinationsData.find(destination => destination.id === trip.destinationID);
       let flightsCost = destination.estimatedFlightCostPerPerson * trip.travelers;
       let lodgingCost = destination.estimatedLodgingCostPerDay * trip.duration;
@@ -55,7 +54,7 @@ class Agency extends Finder{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(tripObject)
-      })
+    })
       .then(response => response.json())
       .then(response => console.log(response))
       .catch(error => console.log(error.message))
@@ -71,12 +70,11 @@ class Agency extends Finder{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(tripObject)
-      })
+    })
       .then(response => response.json())
       .then(response => console.log(response))
       .catch(error => console.log(error.message))
   }
-
 }
 
 

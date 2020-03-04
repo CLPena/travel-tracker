@@ -1,0 +1,27 @@
+//TRAVELER DASHBOARD
+.book-trip-form {
+  @include basic-flex(column nowrap) justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.book-input {
+  @include input-defaults;
+  width: 90%;
+}
+
+.book-label {
+  font-size: 16px;
+  @include margin-bottom-top(2px, 5px)
+}
+
+.submit-button {
+  width: 30%;
+}
+
+.book-trip-button {
+  width: 70%;
+}

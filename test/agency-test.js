@@ -1,11 +1,9 @@
 import {expect} from 'chai';
 import moment from 'moment';
 
-import Finder from '../src/finder';
 import Agency from '../src/agency'
-import Traveler from '../src/traveler'
 
-let agency, traveler, tripsData, destinationsData, travelersData;
+let agency, tripsData, destinationsData, travelersData;
 
 describe('Agency', function() {
   beforeEach(() => {
@@ -134,8 +132,7 @@ describe('Agency', function() {
         "duration": 17,
         "status": "pending",
         "suggestedActivities": []
-      }
-    ]);
+      }]);
   });
 
   it('Should be able to find pending trips', () => {
@@ -159,8 +156,7 @@ describe('Agency', function() {
         "duration": 17,
         "status": "pending",
         "suggestedActivities": []
-      }
-    ]);
+      }]);
   });
 
   it('Should be able to calculate annual income', () => {

@@ -1,6 +1,10 @@
 @import 'variables';
 @import 'mixins';
+@import 'agency-dashboard-styles';
+@import 'traveler-dashboard-styles';
+@import 'login-styles';
 
+//UNIVERSAL
 html {
   height: 100vh;
   @include regular-font;
@@ -8,7 +12,7 @@ html {
 
 body {
   background-color: $light-blue;
-  background-image: url(../images/login-background.jpg);
+  background-image: url("../images/login-background.jpg");
   background-attachment: fixed;
   color: $eggplant;
   @include no-margin-padding;
@@ -30,19 +34,19 @@ header {
   justify-content: space-between;
 }
 
-.logo-h1-container {
-  @include basic-flex(row nowrap);
-  @include no-margin-padding;
-}
-
-.banner-welcome {
-  margin-right: 25%;
-}
-
 main {
   align-items: center;
-  @include basic-flex(row wrap)
-  justify-content: space-around;
+  @include basic-flex(row wrap) justify-content: space-around;
+}
+
+button,
+label {
+  font-size: 18px;
+  @include bold-font;
+}
+
+button {
+  @include button-defaults;
 }
 
 h1 {
@@ -52,7 +56,16 @@ h1 {
 }
 
 h3 {
-  margin-top: 0px;
+  margin-top: 0;
+}
+
+.logo-h1-container {
+  @include basic-flex(row nowrap);
+  @include no-margin-padding;
+}
+
+.banner-welcome {
+  @include margin-bottom-top(0, 0) margin-right: 5%;
 }
 
 .compass {
@@ -60,70 +73,12 @@ h3 {
   margin: 0 5px;
 }
 
-.pin {
-  height: 1em;
-}
-
-.login-form {
-  align-items: center;
-  background-color: $transparent-white;
-  @include clay-border;
-  @include basic-flex(column nowrap)
-  height: 350px;
-  justify-content: space-around;
-  margin: 0;
-  padding: 1em;
-  width: 300px;
-}
-
-.book-trip-form {
-  @include basic-flex(column nowrap)
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.login-input {
-  @include input-defaults;
-  width: 75%;
-}
-
-.book-input {
-  @include input-defaults;
-  width: 90%;
-}
-
-label, button {
-  font-size: 18px;
-  @include bold-font;
-}
-
-button {
-  @include button-defaults;
-}
-
-.book-label {
-  font-size: 16px;
-  @include margin-bottom-top(2px, 5px)
-}
-
-.submit-button {
-  width: 30%;
-}
-
-.book-trip-button {
-  width: 70%;
-}
-
 .hidden {
   display: none;
 }
 
 .home-button {
-  background: url('../images/compass.png') no-repeat;
+  background: url("../images/compass.png") no-repeat;
   background-size: contain;
   border: none;
   height: 2em;
@@ -131,17 +86,10 @@ button {
   width: 2em;
 }
 
-.error-message {
-  @include clay-border;
-  padding: 1em;
-  width: 75%;
-}
-
 .user-dashboard {
   align-items: flex-start;
   background-color: $transparent-white;
-  @include basic-flex(row wrap)
-  justify-content: space-around;
+  @include basic-flex(row wrap) justify-content: space-around;
   margin-top: 15%;
   height: 85%;
   padding: 1em;
@@ -149,14 +97,6 @@ button {
   position: fixed;
   bottom: 0;
   overflow-y: scroll;
-}
-
-.traveler-trips, .cost-widget, .traveler-info, .book-trip-widget {
-  background-color: $transparent-white;
-  @include clay-border;
-  @include basic-flex(column nowrap);
-  padding: 1em;
-  margin: 1%;
 }
 
 .bold {
@@ -172,56 +112,10 @@ button {
   @include margin-bottom-top(10px, 10px)
 }
 
-.destination {
-  @include margin-bottom-top(0, 8px)
-}
-
-.trip-info {
-  @include margin-bottom-top(2px, 0)
-}
-
-.banner-welcome {
-  @include margin-bottom-top(0, 0)
-  margin-right: 5%;
-}
-
-.approve {
-  background-color: transparent;
-  background-image: url(../images/approve.png);
-  background-size: contain;
-  height: 1.5em;
-  width: 1.5em;
-  margin: 2px;
-  border-radius: 100%;
-  border: none;
-}
-
-.deny {
-  background-color: transparent;
-  background-image: url(../images/deny.png);
-  background-size: contain;
-  height: 1.5em;
-  width: 1.5em;
-  margin: 2px;
-  border-radius: 100%;
-  border: none;
-}
-
-.traveler-snapshot {
+.widget {
+  background-color: $transparent-white;
+  @include clay-border;
   @include basic-flex(column nowrap);
-  width: 90%;
   padding: 1em;
-  margin: 0;
-  .bold {
-    margin-top: 8px;
-  }
-}
-
-.find-traveler-form {
-  width: 100%;
-  @include no-margin-padding;
-}
-
-.traveler-input {
-  margin: 0;
+  margin: 1%;
 }

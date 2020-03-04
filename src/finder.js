@@ -9,10 +9,6 @@ class Finder {
     return this.tripsData.filter(trip => trip.userID === traveler.id);
   }
 
-  // findDestinationById(destinationId) {
-  //   return this.destinationsData.filter(destination => destination.id === traveler.id);
-  // }
-
 }
 
 export default Finder;

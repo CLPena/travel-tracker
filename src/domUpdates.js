@@ -4,11 +4,11 @@ import TripFinder from './tripFinder';
 
 
 let domUpdates = {
-  showTravelerDashboard(traveler){
+  showTravelerDashboard(traveler) {
     $('header').append(`<h2 class="banner-welcome"> Welcome, ${traveler.name}!</h2>`)
     $('main').append(
       `<div class="user-dashboard">
-        <div class="traveler-info">
+        <div class="widget">
           <h3> PROFILE: </h3>
           <p class="bold">name:</p>
           <p class="info">${traveler.name}</p>
@@ -23,9 +23,9 @@ let domUpdates = {
   createPendingTripsWidget(tripFinder, destinationsData) {
     let travelerPendingTrips;
 
-    if (tripFinder.pendingTrips.length){
+    if (tripFinder.pendingTrips.length) {
       travelerPendingTrips = (tripFinder.pendingTrips.map(trip => {
-      return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+        return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
       <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
       <p class="trip-info">travelers: ${trip.travelers}</p>
       `
@@ -35,7 +35,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="widget">
         <h3>PENDING TRIPS:</h3>
         <p class="info">${travelerPendingTrips}</p>
       </div>`
@@ -45,9 +45,9 @@ let domUpdates = {
   createUpcomingTripsWidget(tripFinder, destinationsData) {
     let travelerUpcomingTrips;
 
-    if (tripFinder.upcomingTrips.length){
+    if (tripFinder.upcomingTrips.length) {
       travelerUpcomingTrips = (tripFinder.upcomingTrips.map(trip => {
-      return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+        return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
       <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
       <p class="trip-info">travelers: ${trip.travelers}</p>
       `
@@ -57,7 +57,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="widget">
         <h3>UPCOMING TRIPS:</h3>
         <p class="info">${travelerUpcomingTrips}</p>
       </div>`
@@ -67,9 +67,9 @@ let domUpdates = {
   createPastTripsWidget(tripFinder, destinationsData) {
     let travelerPastTrips;
 
-    if (tripFinder.pastTrips.length){
+    if (tripFinder.pastTrips.length) {
       travelerPastTrips = (tripFinder.pastTrips.map(trip => {
-      return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
+        return `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
       <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
       <p class="trip-info">travelers: ${trip.travelers}</p>
       `
@@ -79,7 +79,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="widget">
         <h3>PAST TRIPS:</h3>
         <p class="info">${travelerPastTrips}</p>
       </div>`
@@ -89,7 +89,7 @@ let domUpdates = {
   createCurrentTripWidget(tripFinder, destinationsData) {
     let travelerCurrentTrip;
 
-    if (tripFinder.currentTrip){
+    if (tripFinder.currentTrip) {
       let trip = tripFinder.currentTrip;
       travelerCurrentTrip = `<p class="bold destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
       <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
@@ -100,7 +100,7 @@ let domUpdates = {
     }
 
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="widget">
         <h3>CURRENT TRIP:</h3>
         <p class="info">${travelerCurrentTrip}</p>
       </div>`
@@ -110,14 +110,14 @@ let domUpdates = {
   createCostOfTravelWidget(tripFinder) {
     if (tripFinder.annualCost === 0) {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="widget">
           <h3>TRAVEL EXPENSES THIS YEAR:</h3>
           <p class="info">no travel expenses (yet)!</p>
         </div>`
       )
     } else {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="widget">
           <h3>ANNUAL TRAVEL EXPENSES:</h3>
           <p class="info">$${tripFinder.annualCost}</p>
         </div>`
@@ -128,7 +128,7 @@ let domUpdates = {
   createBookTripWidget(destinationsData) {
     let today = moment().format("YYYY-MM-DD");
     $('.user-dashboard').append(
-      `<div class="book-trip-widget">
+      `<div class="widget">
         <h3>BOOK A TRIP:</h3>
         <form class="book-trip-form">
           <label class="book-label" for="start date">start date:</label>
@@ -167,7 +167,7 @@ let domUpdates = {
     )
   },
 
-  showAgentDashboard(){
+  showAgentDashboard() {
     $('header').append(`<h2 class="banner-welcome"> Welcome, Travel Agent! </h2>`);
     $('main').append(
       `<div class="user-dashboard">
@@ -178,14 +178,14 @@ let domUpdates = {
   createAgencyIncomeWidget(agency) {
     if (agency.annualIncome === 0) {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="widget">
           <h3>ANNUAL COMMISSION:</h3>
           <p class="info">no commission (yet)!</p>
         </div>`
       )
     } else {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="widget">
           <h3>YOUR ANNUAL COMMISSION:</h3>
           <p class="info">$${agency.annualIncome}</p>
         </div>`
@@ -196,14 +196,14 @@ let domUpdates = {
   createTravelersTodayWidget(agency) {
     if (agency.travelersToday.length === 0) {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="widget">
           <h3>NUMBER OF TRAVELERS TODAY:</h3>
           <p class="info">no travelers today!</p>
         </div>`
       )
     } else {
       $('.user-dashboard').append(
-        `<div class="cost-widget">
+        `<div class="widget">
           <h3>NUMBER OF TRAVELERS TODAY:</h3>
           <p class="info">${agency.travelersToday}</p>
         </div>`
@@ -215,7 +215,7 @@ let domUpdates = {
     let agencyPendingTrips;
     if (agency.pendingTrips.length) {
       agencyPendingTrips = (agency.pendingTrips.map(trip => {
-      return `
+        return `
       <div class="pending-trips" id="${trip.id}">
         <p class="bold destination">traveler: ${(travelersData.find(traveler => traveler.id === trip.userID)).name}</p>
         <p class="trip-info destination">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
@@ -230,7 +230,7 @@ let domUpdates = {
       agencyPendingTrips = `<p class="bold destination">no pending trips!</p>`
     }
     $('.user-dashboard').append(
-      `<div class="traveler-trips">
+      `<div class="widget">
         <h3>PENDING TRIPS:</h3>
         <p class="info">${agencyPendingTrips}</p>
       </div>`
@@ -239,7 +239,7 @@ let domUpdates = {
 
   createViewTravelerInfoWidget(travelersData) {
     $('.user-dashboard').append(
-      `<div class="traveler-trips traveler-info">
+      `<div class="widget">
         <h3>VIEW TRAVELER INFORMATION:</h3>
         <form class="find-traveler-form">
           <label class="traveler-label" for="traveler">traveler name:</label>
@@ -264,7 +264,7 @@ let domUpdates = {
   },
 
   displayError() {
-      $('.error-message').removeClass('hidden');
+    $('.error-message').removeClass('hidden');
   },
 
   clearMain() {
@@ -287,13 +287,13 @@ let domUpdates = {
         <p class="bold">yearly travel spending: $${tripFinder.annualCost}</p>
         <p class="bold">all trips: ${this.displayAllTrips(foundTraveler, destinationsData, tripFinder)}</p>
       </div>
-      `    )
+      `)
   },
 
   displayAllTrips(foundTraveler, destinationsData, tripFinder) {
     let tripsList = tripFinder.findTripsForTraveler(foundTraveler);
     return (tripsList.map(trip => {
-      if(trip.status === "approved") {
+      if (trip.status === "approved") {
         return `<div class="pending-trips" id="${trip.id}">
           <p class="bold">destination: ${(destinationsData.find(destination => destination.id === trip.destinationID)).destination}</p>
           <p class="trip-info">departure: ${trip.date} | duration: ${trip.duration} days</p>
@@ -314,7 +314,6 @@ let domUpdates = {
       }
     })).join("")
   }
-
 }
 
 export default domUpdates;
