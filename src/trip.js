@@ -5,33 +5,33 @@ class Trip {
   constructor(traveler, destinationsData) {
     this.id = Date.now();
     this.userID = traveler.id;
-    this.destinationID = this.findDestinationID(destinationsData);
-    this.travelers = this.getTravelers();
-    this.date = this.getDate();
-    this.duration = this.calculateDuration();
+    this.destinationID = 0;
+    this.travelers = 0;
+    this.date = 0;
+    this.duration = 0;
     this.status = "pending";
     this.suggestedActivities = [];
   }
 
   findDestinationID(destinationsData) {
     let foundDestination = destinationsData.find(destination => destination.destination === $('.location-input').val());
-    return foundDestination.id;
+    this.destinationID = foundDestination.id;
   }
 
   getTravelers() {
-    return parseInt($('.travelers-number').val())
+    this.travelers = parseInt($('.travelers-number').val())
   }
 
   getDate() {
     let date = $('.departure-date').val()
-    return moment(date).format('YYYY/MM/DD');
+    this.date = moment(date).format('YYYY/MM/DD');
   }
 
   calculateDuration() {
     let start = new Date($('.departure-date').val());
     let end = new Date($('.return-date').val());
     let diff = new Date(end - start);
-    return diff / 1000 / 60 / 60 / 24;
+    this.duration = diff / 1000 / 60 / 60 / 24;
   }
 
   calculateTripCost(destinationsData) {

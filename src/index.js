@@ -134,6 +134,10 @@ function checkCompletion() {
 
 function createTrip() {
   trip = new Trip(traveler, destinationsData);
+  trip.findDestinationID(destinationsData);
+  trip.getTravelers();
+  trip.getDate();
+  trip.calculateDuration();
 }
 
 function handleSubmit() {
