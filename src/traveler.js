@@ -3,9 +3,6 @@ class Traveler {
     this.id = id;
     this.name = name;
     this.travelerType = travelerType;
-    this.trips = [];
-    this.approvedTrips = [];
-    this.pendingTrips = [];
   }
 
   bookTrip(trip) {
@@ -19,7 +16,7 @@ class Traveler {
       status: trip.status,
       suggestedActivities: trip.suggestedActivities
     }
-    return fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips", {
+    return window.fetch("https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
