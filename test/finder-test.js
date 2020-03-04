@@ -24,8 +24,8 @@ describe('Traveler', function() {
       "travelers": 5,
       "date": "2020/10/04",
       "duration": 18,
-    "status": "pending",
-    "suggestedActivities": []
+      "status": "pending",
+      "suggestedActivities": []
     },
     {
       "id": 3,

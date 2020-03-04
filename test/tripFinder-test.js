@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import moment from 'moment';
 
-import Finder from '../src/finder';
 import TripFinder from '../src/tripFinder'
 import Traveler from '../src/traveler'
 

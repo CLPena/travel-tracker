@@ -31,7 +31,7 @@ class TripFinder extends Finder {
   findUpcomingTrips() {
     let currentDate = moment().format("YYYY/MM/DD");
     return this.trips.reduce((upcoming, trip) => {
-      if(moment(trip.date).isAfter(currentDate, "day")){
+      if (moment(trip.date).isAfter(currentDate, "day")) {
         upcoming.push(trip);
       }
       return upcoming;
@@ -41,7 +41,7 @@ class TripFinder extends Finder {
   findPastTrips() {
     let currentDate = moment().format("YYYY/MM/DD");
     return this.trips.reduce((past, trip) => {
-      if(moment(trip.date).add(trip.duration, "days").isBefore(currentDate, "day")){
+      if (moment(trip.date).add(trip.duration, "days").isBefore(currentDate, "day")) {
         past.push(trip);
       }
       return past;
@@ -58,7 +58,6 @@ class TripFinder extends Finder {
 
   findCostOfTravel() {
     return this.annualTrips.reduce((totalCost, trip) => {
-      let duration = trip.duration;
       let destination = this.destinationsData.find(destination => destination.id === trip.destinationID);
       let flightsCost = destination.estimatedFlightCostPerPerson * trip.travelers;
       let lodgingCost = destination.estimatedLodgingCostPerDay * trip.duration;

@@ -1,12 +1,9 @@
 import domUpdates from './domUpdates';
-import Destination from './destination';
 import Traveler from './traveler';
 import Trip from './trip';
 import TripFinder from './tripFinder';
-import Finder from './Finder';
 import Agency from './agency';
 
-import $ from 'jquery';
 import './css/base.scss';
 import './images/login-background.jpg';
 import './images/compass.png';
@@ -42,9 +39,7 @@ Promise.all([travelersData, tripsData, destinationsData])
   .catch(error => console.log(error.message))
 
 // DECLARE VARIABLES //
-let traveler, pendingTripDivs, trip, destination, agency, tripFinder, bookTripForm, searchTravelersForm, currentTravelerID;
-let loginMain = document.querySelector('.login-screen');
-let loginSubmitButton = document.querySelector('.login-button');
+let traveler, pendingTripDivs, trip, agency, tripFinder, bookTripForm, searchTravelersForm, currentTravelerID;
 let usernameInput = document.querySelector('.username-input');
 let passwordInput = document.querySelector('.password-input');
 let loginForm = document.querySelector('.login-form');
@@ -54,11 +49,11 @@ let loginForm = document.querySelector('.login-form');
 
 function preventReload(e) {
   e.preventDefault();
-};
+}
 
 function checkPassword() {
   if (passwordInput.value === 'travel2020') {
-    determineIfAgent();
+    determineIfAgent()
   } else {
     domUpdates.displayError();
   }
@@ -83,7 +78,7 @@ function determineTravelerID() {
 }
 
 function checkRange(id) {
-  if(id >= 1 && id <= 50) {
+  if (id >= 1 && id <= 50) {
     domUpdates.clearMain();
     createTraveler(id);
   } else {
@@ -116,7 +111,7 @@ function createAgency() {
 }
 
 function checkSearchValidity() {
-  if(event.target.parentNode.classList.contains('find-traveler-form') && document.querySelector('.find-traveler-form').checkValidity()) {
+  if (event.target.parentNode.classList.contains('find-traveler-form') && document.querySelector('.find-traveler-form').checkValidity()) {
     searchTravelersForm = document.querySelector('.find-traveler-form');
     searchTravelersForm.addEventListener('submit', handleSearchSubmit);
   }
@@ -129,7 +124,7 @@ function handleSearchSubmit(event) {
 }
 
 function checkCompletion() {
-  if(event.target.parentNode.classList.contains('book-trip-form') && document.querySelector('.book-trip-form').checkValidity()) {
+  if (event.target.parentNode.classList.contains('book-trip-form') && document.querySelector('.book-trip-form').checkValidity()) {
     createTrip();
     domUpdates.showCost(destinationsData, trip);
     bookTripForm = document.querySelector('.book-trip-form');
@@ -144,8 +139,8 @@ function createTrip() {
 function handleSubmit() {
   currentTravelerID = traveler.id;
   traveler.bookTrip(trip)
-  .then(() => refreshData())
-  .then(() => createTraveler(currentTravelerID))
+    .then(() => refreshData())
+    .then(() => createTraveler(currentTravelerID))
 }
 
 function refreshData() {
@@ -175,9 +170,9 @@ function refreshData() {
 }
 
 function handleApproveOrDeny() {
-  if(event.target.classList.contains('approve')) {
+  if (event.target.classList.contains('approve')) {
     handleApproveTrip(event);
-  } else if(event.target.classList.contains('deny')) {
+  } else if (event.target.classList.contains('deny')) {
     handleDenyTrip(event);
   }
 }
@@ -185,15 +180,15 @@ function handleApproveOrDeny() {
 function handleApproveTrip(event) {
   let tripID = parseInt(event.target.parentNode.id);
   agency.approveTrip(tripID)
-  .then(() => refreshData())
-  .then(() => domUpdates.clearMain())
-  .then(() => createAgency())
+    .then(() => refreshData())
+    .then(() => domUpdates.clearMain())
+    .then(() => createAgency())
 }
 
 function handleDenyTrip(event) {
   let tripID = parseInt(event.target.parentNode.id);
   agency.denyTrip(tripID)
-  .then(() => refreshData())
-  .then(() => domUpdates.clearMain())
-  .then(() => createAgency())
+    .then(() => refreshData())
+    .then(() => domUpdates.clearMain())
+    .then(() => createAgency())
 }
