@@ -91,12 +91,12 @@ function createTraveler(id) {
   traveler = new Traveler(foundTraveler.id, foundTraveler.name, foundTraveler.travelerType);
   tripFinder = new TripFinder(traveler, tripsData, destinationsData, travelersData);
   domUpdates.showTravelerDashboard(traveler);
-  domUpdates.createBookTripWidget(destinationsData);
+  domUpdates.createCostOfTravelWidget(tripFinder);
   domUpdates.createCurrentTripWidget(tripFinder, destinationsData);
+  domUpdates.createBookTripWidget(destinationsData);
   domUpdates.createUpcomingTripsWidget(tripFinder, destinationsData);
   domUpdates.createPastTripsWidget(tripFinder, destinationsData);
   domUpdates.createPendingTripsWidget(tripFinder, destinationsData);
-  domUpdates.createCostOfTravelWidget(tripFinder);
 }
 
 function createAgency() {

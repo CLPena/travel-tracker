@@ -6,11 +6,15 @@
 
 //UNIVERSAL
 html {
-  height: 100vh;
-  @include regular-font;
+  @include xs;
+  @include sm;
+  @include md;
+  // @include lg;
+  // @include xl;
 }
 
 body {
+  @include regular-font;
   background-color: $light-blue;
   background-image: url("../images/login-background.jpg");
   background-attachment: fixed;
@@ -19,11 +23,12 @@ body {
   @include basic-flex(row wrap);
   justify-content: center;
   height: 100vh;
+  width: 100%;
 }
 
 header {
+  @include basic-flex(row wrap);
   background-color: transparent;
-  @include basic-flex(row nowrap);
   height: 15%;
   margin: 0;
   padding: 1em 1em 1em 4%;
@@ -89,11 +94,12 @@ h3 {
 .user-dashboard {
   align-items: flex-start;
   background-color: $transparent-white;
-  @include basic-flex(row wrap) justify-content: space-around;
+  @include basic-flex(column wrap)
+  justify-content: space-around;
   margin-top: 15%;
-  height: 85%;
+  max-height: 85%;
   padding: 1em;
-  width: 100%;
+  width: 100vw;
   position: fixed;
   bottom: 0;
   overflow-y: scroll;
@@ -117,5 +123,7 @@ h3 {
   @include clay-border;
   @include basic-flex(column nowrap);
   padding: 1em;
-  margin: 1%;
+  width: 20%;
+  overflow: scroll;
+  margin: 8px;
 }

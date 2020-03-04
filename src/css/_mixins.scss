@@ -1,3 +1,69 @@
+//RESPONSIVE LAYOUT
+@mixin xs {
+  @media (min-width: #{$screen-xs}) {
+    @content;
+    .banner-welcome {
+      visibility: hidden;
+    }
+    .widget {
+      width: 75%;
+    }
+    .user-dashboard {
+      @include basic-flex(row wrap)
+    }
+  }
+}
+
+@mixin sm {
+  @media (min-width: #{$screen-sm}) {
+    @content;
+    .banner-welcome {
+      visibility: visible;
+    }
+    .widget {
+      max-width: 220px;
+      min-height: 100px;
+      max-height: 400px;
+    }
+    .user-dashboard {
+      @include basic-flex(row wrap)
+    }
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$screen-md}) {
+    @content;
+    .banner-welcome {
+      visibility: visible;
+    }
+    .widget {
+      min-width: 20%;
+      height: auto;
+      max-height: 90%;
+    }
+    .user-dashboard {
+      @include basic-flex(column wrap)
+    }
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$screen-lg}) {
+    @content;
+    .banner-welcome {
+      visibility: visible;
+    }
+    .widget {
+      width: 20%;
+      max-height: 100%;
+    }
+    .user-dashboard {
+      @include basic-flex(column wrap)
+    }
+  }
+}
+
 //FONTS
 @mixin regular-font {
   font-family: 'Raleway';
