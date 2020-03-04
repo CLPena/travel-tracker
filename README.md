@@ -10,7 +10,7 @@ When a traveler logs in, they can view their user stats, annual travel expenses,
 [Cristina Peña](https://github.com/CLPena)
 
 #### In Action
-![Gif of app](https://i.imgur.com/Xizmyo2.gifv)
+![Gif of app](https://i.imgur.com/Xizmyo2.gif)
 
 #### Project Next Steps
 I would love to further finesse the layout of this to be a truer masonry layout. Though there are breakpoints to accommodate different screen sizes, I'd like to refine them even further to eliminate awkward in-between spots. I would also like to add more visual interest, like icons in the widgets and viewable photos of destinations.
