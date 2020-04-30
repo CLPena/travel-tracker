@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "chai-jquery": "^2.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-html5-validity": "^1.1.2",
     "js-datepicker": "^5.4.0",
     "moment": "^2.24.0"
